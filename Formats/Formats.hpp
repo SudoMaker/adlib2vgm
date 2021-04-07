@@ -27,3 +27,5 @@
 #include "mid.h"
 #include "cmf.h"
 #include "mus.h"
+#include "adtrack.h"
+#include "protrack.h"
