@@ -10,12 +10,13 @@ If one wants to build a player that uses/emulates these vintage sound chips, usi
 ### Programming Practises
 It's almost impossible to directly integrate AdPlug into a modern C++ project that uses CMake & self-contained dependency management.
 
+## Binary releases
+- Windows 64 bit: See the [releases](https://github.com/SudoMaker/adlib2vgm/releases) section
+
 ## Build requirements
 - C++17 compatible compiler
 - CMake 3.14+
 - POSIX compatible environment
-
-Binary releases are coming soon.
 
 Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 
@@ -33,6 +34,10 @@ Other formats supported by AdPlug can be added by copying the decoding code piec
 ## Usage examples
 ```shell script
 adlib2vgm -i ~/Downloads/ALLOYRUN.RAD -o ALLOYRUN.vgm
+```
+
+```shell script
+adlib2vgm.exe -i D:\Downloads\ALLOYRUN.RAD -o ALLOYRUN.vgm
 ```
 
 ```shell script
