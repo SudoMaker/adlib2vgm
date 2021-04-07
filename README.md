@@ -11,7 +11,12 @@ If one wants to build a player that uses/emulates these vintage sound chips, usi
 It's almost impossible to directly integrate AdPlug into a modern C++ project that uses CMake & self-contained dependency management.
 
 ## Binary releases
-- Windows 64 bit: See the [releases](https://github.com/SudoMaker/adlib2vgm/releases) section
+See the [releases](https://github.com/SudoMaker/adlib2vgm/releases) section.
+
+Currently built targets:
+- Linux x86_64 (glibc 2.28+)
+- Windows x86_64 (Windows 7+)
+
 
 ## Build requirements
 - C++17 compatible compiler
@@ -57,7 +62,6 @@ adlib2vgm -i ./pal1/30.乐逍遥.RIX -o 30.乐逍遥.vgm
 ```
 
 ## TODO
-- Binary releases
 - Better file format detection
 - Loops
 - Metadata
