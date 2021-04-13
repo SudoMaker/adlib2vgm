@@ -1,4 +1,5 @@
-# adlib2vgm
+# adlib2vgm [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Build/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/push_pr_build_cmake.yml) [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Release/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/release_cmake.yml)
+
 Converts file formats supported by AdPlug to VGM format.
 
 ## Why?
