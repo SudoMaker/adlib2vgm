@@ -2,6 +2,11 @@
 
 Converts file formats supported by AdPlug to VGM format.
 
+## Notice
+This tool is originally designed to work with the [RetroWave OPL3 Sound Card](https://www.tindie.com/products/sudomaker/retrowave-opl3-sound-card/).
+
+Currently it doesn't produce files that's 100% compatible with the VGMPlay software.
+
 ## Why?
 ### Format
 VGM is the next universal format for various vintage sound chips. It's ~~well~~ documented and extensible.
