@@ -48,6 +48,9 @@ std::unordered_map<std::string, std::function<std::unique_ptr<CPlayer>()>> forma
 
 	// MUS: AdLib MIDI Music Format by Ad Lib Inc.
 	{"MUS", []{return std::make_unique<CmusPlayer>(&thisopl);}},
+
+	// LDS: Loudness Sound System by Andras Molnar
+	{"LDS", []{return std::make_unique<CldsPlayer>(&thisopl);}},
 };
 
 int main(int argc, char **argv) {

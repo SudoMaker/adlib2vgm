@@ -27,3 +27,4 @@
 #include "mid.h"
 #include "cmf.h"
 #include "mus.h"
+#include "lds.h"
