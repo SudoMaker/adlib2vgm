@@ -282,13 +282,13 @@ bool Cs3mPlayer::update()
     switch (pattnr) {
     default:	// skip invalid pattern
       AdPlug_LogWrite("Invalid pattern %d number (order %d)\n", pattnr, ord);
-      // fallthrough;
+      [[fallthrough]];
     case 0xfe:	// "++" skip marker
       if (ord + 1 < header.ordnum) {
 	ord++;
 	break;
       }
-      // else fallthrough;
+      [[fallthrough]];
     case 0xff:	// "--" end of song
       ord = 0;
       songend = 1;
@@ -474,6 +474,7 @@ bool Cs3mPlayer::update()
 
 void Cs3mPlayer::rewind(int subsong)
 {
+  UNUSED(subsong);
   // set basic variables
   songend = 0;
   ord = 0;

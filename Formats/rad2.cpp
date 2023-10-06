@@ -1809,7 +1809,11 @@ void RADPlayer::Transpose(int8_t note, int8_t octave) {
 // prior to initial playback.
 //==================================================================================================
 #if RAD_DETECT_REPEATS
-static void RADPlayerDummyOPL3(void *arg, uint16_t reg, uint8_t data) {}
+static void RADPlayerDummyOPL3(void *arg, uint16_t reg, uint8_t data) {
+    UNUSED(arg);
+    UNUSED(reg);
+    UNUSED(data);
+}
 //--------------------------------------------------------------------------------------------------
 uint32_t RADPlayer::ComputeTotalTime() {
 

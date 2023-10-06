@@ -174,6 +174,7 @@ bool CrolPlayer::update()
 //---------------------------------------------------------
 void CrolPlayer::frontend_rewind(int subsong)
 {
+    UNUSED(subsong);
     TVoiceData::iterator curr = mVoiceData.begin();
     TVoiceData::iterator end  = mVoiceData.end();
 

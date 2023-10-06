@@ -171,6 +171,7 @@ bool CrawPlayer::update()
 
 void CrawPlayer::rewind(int subsong)
 {
+  UNUSED(subsong);
   pos = del = 0; speed = clock; songend = false;
   opl->init(); opl->write(1, 32);	// go to 9 channel mode
 }

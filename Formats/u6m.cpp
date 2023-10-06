@@ -144,6 +144,7 @@ bool Cu6mPlayer::update()
 
 void Cu6mPlayer::rewind(int subsong)
 {
+  UNUSED(subsong);
   songend = false;
 
   // set the driver's internal variables
