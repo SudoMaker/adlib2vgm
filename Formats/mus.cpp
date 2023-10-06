@@ -391,6 +391,7 @@ bool CmusPlayer::FetchTimbreData(const std::string fname, const CFileProvider &f
 
 void CmusPlayer::rewind(int subsong)
 {
+	UNUSED(subsong);
 	SetTempo(basicTempo, tickBeat);
 	pos = 0; songend = false;
 	opl->init();

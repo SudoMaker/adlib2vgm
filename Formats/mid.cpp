@@ -90,6 +90,7 @@
 #else
 void CmidPlayer::midiprintf(const char *format, ...)
     {
+        UNUSED(format);
     }
 #endif
 
@@ -145,7 +146,7 @@ CmidPlayer::CmidPlayer(Copl *newopl)
 
 unsigned char CmidPlayer::datalook(long pos)
 {
-    if (pos<0 || pos >= flen) return(0);
+    if (pos<0 || (unsigned long) pos >= flen) return(0);
     return(data[pos]);
 }
 
@@ -885,7 +886,7 @@ float CmidPlayer::getrefresh()
 
 void CmidPlayer::rewind(int subsong)
 {
-    long i,j,n,m,l;
+    unsigned long i,j,n,m,l;
     long o_sierra_pos;
     unsigned char ins[16];
 
@@ -940,6 +941,7 @@ void CmidPlayer::rewind(int subsong)
                 getnext(24);  //skip junk and get to the midi.
                 adlib_style=LUCAS_STYLE|MIDI_STYLE;
                 //note: no break, we go right into midi headers...
+                [[fallthrough]];
             case FILE_MIDI:
                 if (type != FILE_LUCAS)
                     tins=128;
@@ -1074,7 +1076,7 @@ void CmidPlayer::rewind(int subsong)
                 sierra_pos=o_sierra_pos;
                 sierra_next_section();
                 i=0;
-                while (i != subsong)
+                while (i != (unsigned long) subsong)
                     {
                     sierra_next_section();
                     i++;

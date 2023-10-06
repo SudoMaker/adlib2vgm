@@ -27,7 +27,7 @@
  * Hard restart SR is sometimes wrong
  */
 
-#include "d00.hpp"
+#include "d00.h"
 
 #define HIBYTE(val)	(val >> 8)
 #define LOBYTE(val)	(val & 0xff)

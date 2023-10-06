@@ -138,6 +138,7 @@ bool CmodPlayer::update()
       tone_portamento(chan,channel[chan].portainfo);
     else
       vibrato(chan,channel[chan].vibinfo1,channel[chan].vibinfo2);
+    [[fallthrough]];
     case 10:
       if(del % 4)	// SA2 volume slide
         break;
@@ -504,6 +505,7 @@ bool CmodPlayer::resolve_order()
 
 void CmodPlayer::rewind(int subsong)
 {
+  UNUSED(subsong);
   unsigned long i;
 
   // Reset playing variables

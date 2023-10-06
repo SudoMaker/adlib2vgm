@@ -71,7 +71,7 @@ public:
   };
 
   char *author,*title,*remarks,emptystr;
-  long flen;
+  unsigned long flen;
   unsigned long pos;
   unsigned long sierra_pos; //sierras gotta be special.. :>
   int subsongs;
@@ -94,7 +94,7 @@ public:
   unsigned long iwait;
   int doing;
 
-  int type,tins,stins;
+  unsigned long int type,tins,stins;
 
  private:
   bool load_sierra_ins(const std::string &fname, const CFileProvider &fp);

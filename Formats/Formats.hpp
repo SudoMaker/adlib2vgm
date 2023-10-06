@@ -19,8 +19,8 @@
 
 #pragma once
 
-#include "d00.hpp"
-#include "rad2.hpp"
+#include "d00.h"
+#include "rad2.h"
 #include "dro.h"
 #include "dro2.h"
 #include "rix.h"
