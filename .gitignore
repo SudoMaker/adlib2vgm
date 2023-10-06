@@ -1,0 +1,10 @@
+CMakeCache.txt
+CMakeFiles/*
+CPM_modules/*
+Makefile
+_deps/
+adlib2vgm
+cmake/*
+cmake_install.cmake
+cpm-package-lock.cmake
+
