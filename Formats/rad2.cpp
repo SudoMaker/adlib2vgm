@@ -1908,7 +1908,7 @@ bool Crad2Player::load(const std::string &filename, const CFileProvider &fp) {
 		}
 	}
 	else {
-		AdPlug_LogWrite("Crad2Player::load(\"%s\"): %s\n", filename.c_str(), err);
+		AdPlug_LogError("Crad2Player::load(\"%s\"): %s\n", filename.c_str(), err);
 	}
 
 	delete[] newdata;

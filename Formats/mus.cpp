@@ -35,7 +35,7 @@
 #include "mus.h"
 
 #ifdef DEBUG
-#include "debug.h"
+//#include "debug.h"
 #endif
 
 /*** public methods *************************************/
@@ -237,7 +237,7 @@ bool CmusPlayer::LoadTimbreBank(const std::string fname, const CFileProvider &fp
 	binistream *f = fp.open(fname);
 	if (!f) {
 		#ifdef DEBUG
-		AdPlug_LogWrite("Timbre bank not found: %s\n", fname.c_str());
+		AdPlug_LogError("Timbre bank not found: %s\n", fname.c_str());
 		#endif
 		return false;
 	}

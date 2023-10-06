@@ -100,9 +100,9 @@ bool CrolPlayer::load(const std::string & filename, const CFileProvider & fp)
     // Version check
     if ((mpROLHeader->version_major != skVersionMinor) || (mpROLHeader->version_minor != skVersionMajor))
     {
-        AdPlug_LogWrite("Unsupported file version %d.%d or not a ROL file!\n",
+        AdPlug_LogError("Unsupported file version %d.%d or not a ROL file!\n",
                         mpROLHeader->version_major, mpROLHeader->version_minor);
-        AdPlug_LogWrite("--- CrolPlayer::load ---\n");
+        AdPlug_LogError("--- CrolPlayer::load ---\n");
         fp.close(f);
         return false;
     }
@@ -128,8 +128,8 @@ bool CrolPlayer::load(const std::string & filename, const CFileProvider & fp)
 
     if (load_voice_data(f, bnk_filename, fp) != true)
     {
-      AdPlug_LogWrite("CrolPlayer::load_voice_data(f) failed!\n");
-      AdPlug_LogWrite("--- CrolPlayer::load ---\n");
+      AdPlug_LogError("CrolPlayer::load_voice_data(f) failed!\n");
+      AdPlug_LogError("--- CrolPlayer::load ---\n");
 
       fp.close(f);
       return false;

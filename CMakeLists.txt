@@ -26,6 +26,8 @@ CPMAddPackage(
         VERSION 0.1.8
 )
 
+set (CMAKE_CXX_FLAGS "-DDEBUG")
+
 include_directories(${cxxopts_SOURCE_DIR}/include)
 
 file(GLOB_RECURSE SOURCES_BINIO "binio/*.*")

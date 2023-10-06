@@ -38,7 +38,8 @@
 #include <IODash.hpp>
 
 #define stricmp			strcasecmp
-#define AdPlug_LogWrite		if (global_debug) printf
+#define AdPlug_LogWrite(...)		if (global_debug) printf(__VA_ARGS__)
+#define AdPlug_LogError(...)		fprintf(stderr, __VA_ARGS__)
 
 extern bool global_use_opl3;
 extern bool global_verbose;

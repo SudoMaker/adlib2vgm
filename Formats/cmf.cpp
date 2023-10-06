@@ -123,7 +123,7 @@ bool CcmfPlayer::load(const std::string &filename, const CFileProvider &fp)
 	}
 	uint16_t iVer = f->readInt(2);
 	if ((iVer != 0x0101) && (iVer != 0x0100)) {
-		AdPlug_LogWrite("CMF file is not v1.0 or v1.1 (reports %d.%d)\n", iVer >> 8 , iVer & 0xFF);
+		AdPlug_LogError("CMF file is not v1.0 or v1.1 (reports %d.%d)\n", iVer >> 8 , iVer & 0xFF);
 		fp.close(f);
 		return false;
 	}
