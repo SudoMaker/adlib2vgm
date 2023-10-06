@@ -103,6 +103,7 @@ int main(int argc, char **argv) {
 	}
 
 	std::unique_ptr<CPlayer> player;
+	global_use_opl3 = mode == "opl3";
 	thisopl = {output_file};
 
 	if (format.empty()) {
@@ -133,15 +134,6 @@ int main(int argc, char **argv) {
 		puts("error: please supply a file with proper extension, or use the -f option.");
 		return 2;
 	}
-
-	if (mode == "opl2") {
-		thisopl.settype(Copl::ChipType::TYPE_OPL2);
-		global_use_opl3 = 0;
-	} else {
-		thisopl.settype(Copl::ChipType::TYPE_OPL3);
-		global_use_opl3 = 1;
-	}
-
 
 	if (!player->load(input_file, CProvider_Filesystem())) {
 		puts("error: failed to open file");

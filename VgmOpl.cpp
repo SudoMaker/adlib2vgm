@@ -32,8 +32,13 @@ VgmOpl::VgmOpl(const std::string &filename) {
 
 	buf32[0x34 / 4] = 0x0000004c;
 
-	buf32[0x50 / 4] = 3579545;
-	buf32[0x5c / 4] = 14318180;
+	if (!global_use_opl3) {
+		buf32[0x50 / 4] = 3579545;
+		settype(TYPE_OPL2);
+	} else {
+		buf32[0x5c / 4] = 14318180;
+		settype(TYPE_OPL3);
+	}
 
 	buffer.insert(buffer.end(), buf, buf+sizeof(buf));
 }
