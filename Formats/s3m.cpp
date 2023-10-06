@@ -102,7 +102,6 @@ bool Cs3mPlayer::load(const std::string &filename, const CFileProvider &fp)
     return false;
   }
 
-  AdPlug_LogWrite("version
   // load section
   for (i = 0; i < header.ordnum; i++)	// read orders
     orders[i] = f->readInt(1);
