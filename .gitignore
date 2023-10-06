@@ -7,4 +7,4 @@ adlib2vgm
 cmake/*
 cmake_install.cmake
 cpm-package-lock.cmake
-
+*~
