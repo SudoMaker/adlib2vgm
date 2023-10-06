@@ -401,6 +401,7 @@ bool CcmfPlayer::update()
 
 void CcmfPlayer::rewind(int subsong)
 {
+  UNUSED(subsong);
   this->opl->init();
 
 	// Initialise
@@ -712,6 +713,7 @@ void CcmfPlayer::cmfNoteOn(uint8_t iChannel, uint8_t iNote, uint8_t iVelocity)
 
 void CcmfPlayer::cmfNoteOff(uint8_t iChannel, uint8_t iNote, uint8_t iVelocity)
 {
+    UNUSED(iVelocity);
 	if ((iChannel > 10) && (this->bPercussive)) {
 		int iOPLChannel = this->getPercChannel(iChannel);
 		if (this->chOPL[iOPLChannel].iMIDINote != iNote) return; // there's a different note playing now

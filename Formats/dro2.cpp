@@ -180,6 +180,7 @@ bool Cdro2Player::update()
 
 void Cdro2Player::rewind(int subsong)
 {
+    UNUSED(subsong);
 	this->iDelay = 0;
 	this->iPos = 0;
 	opl->init(); 

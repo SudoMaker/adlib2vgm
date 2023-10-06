@@ -38,6 +38,7 @@ CPlayer::~CPlayer()
 
 unsigned long CPlayer::songlength(int subsong)
 {
+    UNUSED(subsong);
 	return 0;
 }
 

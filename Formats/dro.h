@@ -39,8 +39,8 @@ class CdroPlayer: public CPlayer
 		static const uint8_t iCmdDelayL = 0x01; // Wraithverge: fixed this with "static".
 
 		uint8_t *data;
-		int iLength;
-		int iPos;
+		long unsigned int iLength;
+		long unsigned int iPos;
 		int iDelay;
 
 	private:

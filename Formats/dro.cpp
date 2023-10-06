@@ -96,7 +96,7 @@ bool CdroPlayer::load(const std::string &filename, const CFileProvider &fp)
 	}
 
 	// Read the OPL data.
-	for (; (int)i < this->iLength; i++) {
+	for (; i < this->iLength; i++) {
 		this->data[i]=f->readInt(1);
 	}
 
@@ -190,6 +190,7 @@ bool CdroPlayer::update()
 
 void CdroPlayer::rewind(int subsong)
 {
+    UNUSED(subsong);
 	this->iDelay = 0;
 	this->iPos = 0;
 	opl->init();

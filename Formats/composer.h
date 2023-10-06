@@ -65,6 +65,8 @@ public:
 
     virtual bool load(const std::string &filename, const CFileProvider &fp)
     {
+        UNUSED(filename);
+        UNUSED(fp);
         return false;
     };
     virtual bool update()
@@ -80,7 +82,7 @@ public:
 
     virtual std::string gettype() { return std::string("AdLib Visual Composer"); }
     virtual unsigned int getinstruments() { return 0; };
-    virtual std::string getinstrument(unsigned int n) { return std::string(); };
+    virtual std::string getinstrument(unsigned int n) { UNUSED(n); return std::string(); };
     virtual std::string getdesc() { return std::string(); };
 
     typedef struct

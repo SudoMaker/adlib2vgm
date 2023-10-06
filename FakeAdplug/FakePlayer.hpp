@@ -70,7 +70,7 @@ public:
 	virtual unsigned int getinstruments()	// returns number of instruments
 	{ return 0; }
 	virtual std::string getinstrument(unsigned int n)	// returns n-th instrument name
-	{ return std::string(); }
+	{ UNUSED(n); return std::string(); }
 
 protected:
 	Copl		*opl;	// our OPL chip

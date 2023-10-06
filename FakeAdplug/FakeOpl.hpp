@@ -67,10 +67,10 @@ public:
 	}
 
 	// Emulation only: fill buffer
-	virtual void update(short *buf, int samples) {}
+	virtual void update(short *buf, int samples) {UNUSED(buf);UNUSED(samples);}
 
 	// Set surroundopl offset
-	virtual void set_offset(double offset) {}
+	virtual void set_offset(double offset) { UNUSED(offset); }
 
 protected:
 	int		currChip;		// currently selected OPL chip number

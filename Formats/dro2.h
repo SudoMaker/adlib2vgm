@@ -39,8 +39,8 @@ class Cdro2Player: public CPlayer
 		uint8_t *piConvTable;
 
 		uint8_t *data;
-		int iLength;
-		int iPos;
+		unsigned long int iLength;
+		unsigned long int iPos;
 		int iDelay;
 
 	private:

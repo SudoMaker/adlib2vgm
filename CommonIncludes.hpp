@@ -44,3 +44,6 @@
 extern bool global_use_opl3;
 extern bool global_verbose;
 extern bool global_debug;
+
+// portable unused
+#define UNUSED(x) (void)(x)

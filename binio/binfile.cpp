@@ -44,7 +44,7 @@ void binfbase::close()
 
 void binfbase::seek(long pos, Offset offs)
 {
-  int error;
+  int error = -1;
 
   if(f == NULL) { err |= NotOpen; return; }
 
@@ -96,6 +96,8 @@ binifstream::~binifstream()
 
 void binifstream::open(const char *filename, const Mode mode)
 {
+  (void)mode;       // portable unused
+
   f = fopen(filename, "rb");
 
   if(f == NULL)
