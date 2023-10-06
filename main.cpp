@@ -25,35 +25,34 @@ int global_use_opl3 = 0;
 
 VgmOpl thisopl;
 
-std::unordered_map<std::string, std::function<std::unique_ptr<CPlayer>()>> format_list = {
-	// CMF: Creative Music File Format by Creative Technology
-	{"CMF", []{return std::make_unique<CcmfPlayer>(&thisopl);}},
+struct format {
+    std::string name;
+    std::function<std::unique_ptr<CPlayer>()> player;
+};
 
-	// RAD: Reality ADlib Tracker by Reality
-	{"RAD", []{return std::make_unique<Crad2Player>(&thisopl);}},
-
-	// D00: EdLib by Vibrants
-	{"D00", []{return std::make_unique<Cd00Player>(&thisopl);}},
-
-	// DRO: DOSBox Raw OPL Format
-	{"DRO", []{return std::make_unique<CdroPlayer>(&thisopl);}},
-	{"DRO2", []{return std::make_unique<Cdro2Player>(&thisopl);}},
-
-	// RIX: Softstar RIX OPL Music Format
-	{"RIX", []{return std::make_unique<CrixPlayer>(&thisopl);}},
-
-	// MID: MIDI Audio File Format
-	{"MID", []{return std::make_unique<CmidPlayer>(&thisopl);}},
-	{"MIDI", []{return std::make_unique<CmidPlayer>(&thisopl);}},
-
-	// MUS: AdLib MIDI Music Format by Ad Lib Inc.
-	{"MUS", []{return std::make_unique<CmusPlayer>(&thisopl);}},
-
-	// LDS: Loudness Sound System by Andras Molnar
-	{"LDS", []{return std::make_unique<CldsPlayer>(&thisopl);}},
-
-	// ROL: AdLib Visual Composer by Ad Lib Inc.
-	{"ROL", []{return std::make_unique<CrolPlayer>(&thisopl);}},
+std::unordered_map<std::string, struct format> format_list = {
+	{ "CMF", { "Creative Music File Format by Creative Technology",
+               []{return std::make_unique<CcmfPlayer>(&thisopl);} } },
+	{ "RAD", { "Reality ADlib Tracker by Reality",
+               []{return std::make_unique<Crad2Player>(&thisopl);} } },
+	{ "D00", { "EdLib by Vibrants",
+               []{return std::make_unique<Cd00Player>(&thisopl);} } },
+	{ "DRO", { "DOSBox Raw OPL Format",
+               []{return std::make_unique<CdroPlayer>(&thisopl);} } },
+	{ "DRO2",{ "DOSBox Raw OPL Format",
+               []{return std::make_unique<Cdro2Player>(&thisopl);} } },
+	{ "RIX", { "Softstar RIX OPL Music Format",
+               []{return std::make_unique<CrixPlayer>(&thisopl);} } },
+	{ "MID", { "MIDI Audio File Format",
+               []{return std::make_unique<CmidPlayer>(&thisopl);} } },
+	{ "MIDI",{ "MIDI Audio File Format",
+               []{return std::make_unique<CmidPlayer>(&thisopl);} } },
+	{ "MUS", { "AdLib MIDI Music Format by Ad Lib Inc.",
+               []{return std::make_unique<CmusPlayer>(&thisopl);} } },
+	{ "LDS", { "Loudness Sound System by Andras Molnar",
+               []{return std::make_unique<CldsPlayer>(&thisopl);} } },
+	{ "ROL", { "AdLib Visual Composer by Ad Lib Inc.",
+               []{return std::make_unique<CrolPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
@@ -81,7 +80,8 @@ int main(int argc, char **argv) {
 		if (cmd.count("list-formats")) {
 			puts("Supported formats / file extensions:");
 			for (auto &it : format_list) {
-				puts(it.first.c_str());
+                std::cout << it.first.c_str() << " - " 
+                          << it.second.name   << "\n";
 			}
 			return 0;
 		}
@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
 		auto it = format_list.find(format);
 
 		if (it != format_list.end()) {
-			player = it->second();
+			player = it->second.player();
 		} else {
 			printf("error: file format `%s' is unsupported!\n", format.c_str());
 			return 2;
