@@ -26,7 +26,7 @@ CPMAddPackage(
         VERSION 0.1.8
 )
 
-set (CMAKE_CXX_FLAGS "-DDEBUG")
+set (CMAKE_CXX_FLAGS "-DDEBUG -O3 -W -Wall")
 set (CMAKE_EXE_LINKER_FLAGS "-static -s")
 
 include_directories(${cxxopts_SOURCE_DIR}/include)

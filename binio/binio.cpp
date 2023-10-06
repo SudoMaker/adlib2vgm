@@ -47,7 +47,7 @@
 
 const binio::Flags binio::system_flags = binio::detect_system_flags();
 
-const binio::Flags binio::detect_system_flags()
+binio::Flags binio::detect_system_flags()
 {
   Flags f = 0;
 
@@ -64,13 +64,14 @@ const binio::Flags binio::detect_system_flags()
   float fl = 6.5;
   Byte	*dat = (Byte *)&fl;
 
-  if(sizeof(float) == 4 && sizeof(double) == 8)
+  if(sizeof(float) == 4 && sizeof(double) == 8) {
     if(f & BigEndian) {
       if(dat[0] == 0x40 && dat[1] == 0xD0 && !dat[2] && !dat[3])
 	f |= FloatIEEE;
     } else
       if(dat[3] == 0x40 && dat[2] == 0xD0 && !dat[1] && !dat[0])
       f |= FloatIEEE;
+  }
 
   return f;
 }
@@ -146,7 +147,7 @@ binistream::Int binistream::readInt(unsigned int size)
 binistream::Float binistream::readFloat(FType ft)
 {
   if(getFlag(FloatIEEE)) {	// Read IEEE-754 floating-point value
-    unsigned int	i, size;
+    unsigned int	i, size = 4;
     Byte		in[8];
     bool		swap;
 
@@ -198,7 +199,7 @@ binistream::Float binistream::ieee_single2float(Byte *data)
   if(!exp && !fracthi7 && !data[2] && !data[3]) return sign * 0.0;
 
   // Signed and unsigned infinity (maybe unsupported on non-IEEE systems)
-  if(exp == 255)
+  if(exp == 255) {
     if(!fracthi7 && !data[2] && !data[3]) {
 #ifdef HUGE_VAL
       if(sign == -1) return -HUGE_VAL; else return HUGE_VAL;
@@ -213,6 +214,7 @@ binistream::Float binistream::ieee_single2float(Byte *data)
       err |= Unsupported; return 0.0;
 #endif
     }
+  }
 
   if(!exp)	// Unnormalized float values
     return sign * pow(2, -126) * fract * pow(2, -23);
@@ -236,7 +238,7 @@ binistream::Float binistream::ieee_double2float(Byte *data)
      !data[6] && !data[7]) return sign * 0.0;
 
   // Signed and unsigned infinity  (maybe unsupported on non-IEEE systems)
-  if(exp == 2047)
+  if(exp == 2047) {
     if(!fracthi4 && !data[2] && !data[3] && !data[4] && !data[5] && !data[6] &&
        !data[7]) {
 #ifdef HUGE_VAL
@@ -252,6 +254,7 @@ binistream::Float binistream::ieee_double2float(Byte *data)
       err |= Unsupported; return 0.0;
 #endif
     }
+  }
 
   if(!exp)	// Unnormalized float values
     return sign * pow(2, -1022) * fract * pow(2, -52);
@@ -393,8 +396,8 @@ void binostream::writeInt(Int val, unsigned int size)
 void binostream::writeFloat(Float f, FType ft)
 {
   if(getFlag(FloatIEEE)) {	// Write IEEE-754 floating-point value
-    unsigned int	i, size;
-    Byte		*out;
+    unsigned int	i, size = 4;
+    Byte		*out = NULL;
     bool		swap;
 
     if(system_flags & FloatIEEE) {
