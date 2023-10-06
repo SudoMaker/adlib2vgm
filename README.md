@@ -40,6 +40,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - MID: MIDI Audio File Format
 - MUS: AdLib MIDI Music Format by Ad Lib Inc.
 - ROL: AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk, too)
+- LDS: Loudness Sound System by Andras Molnar
 
 Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 
