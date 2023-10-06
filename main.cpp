@@ -43,6 +43,8 @@ std::unordered_map<std::string, struct format> format_list = {
                []{return std::make_unique<Cdro2Player>(&thisopl);} } },
 	{ "RIX", { "Softstar RIX OPL Music Format",
                []{return std::make_unique<CrixPlayer>(&thisopl);} } },
+	{ "LAA", { "Lucas Arts Adlib Music",
+               []{return std::make_unique<CmidPlayer>(&thisopl);} } },
 	{ "MID", { "MIDI Audio File Format",
                []{return std::make_unique<CmidPlayer>(&thisopl);} } },
 	{ "MUS", { "AdLib MIDI Music Format by Ad Lib Inc.",
