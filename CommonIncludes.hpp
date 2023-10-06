@@ -40,5 +40,5 @@
 #define stricmp			strcasecmp
 #define AdPlug_LogWrite		printf
 
-extern int global_use_opl3;
+extern bool global_use_opl3;
 extern bool global_verbose;
