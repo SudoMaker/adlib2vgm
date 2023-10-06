@@ -56,15 +56,18 @@ void VgmOpl::write(int reg, int val) {
 	if (currType == TYPE_OPL3) {
 		if (currChip == 0) {
 			buf[0] = 0x5e;
-			printf("OPL3 C0 write: 0x%02x 0x%02x\n", reg, val);
+			if (global_verbose)
+				printf("OPL3 C0 write: 0x%02x 0x%02x\n", reg, val);
 
 		} else {
 			buf[0] = 0x5f;
-			printf("OPL3 C1 write: 0x%02x 0x%02x\n", reg, val);
+			if (global_verbose)
+				printf("OPL3 C1 write: 0x%02x 0x%02x\n", reg, val);
 
 		}
 	} else {
-		printf("OPL2 write: 0x%02x 0x%02x\n", reg, val);
+		if (global_verbose)
+			printf("OPL2 write: 0x%02x 0x%02x\n", reg, val);
 	}
 
 	buffer.insert(buffer.end(), buf, buf+sizeof(buf));

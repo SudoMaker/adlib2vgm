@@ -22,6 +22,7 @@
 #include "Formats/Formats.hpp"
 
 int global_use_opl3 = 0;
+bool global_verbose;
 
 VgmOpl thisopl;
 
@@ -63,6 +64,7 @@ int main(int argc, char **argv) {
 	options.add_options()
 		("h,help", "Show this help")
 		("l,list-formats", "List supported formats / file extensions")
+		("v,verbose", "Verbose output during conversion")
 		("m,mode", "Generation mode (opl2/opl3), not supported by all formats", cxxopts::value<std::string>()->default_value("opl2"))
 		("f,format", "Override auto format detection", cxxopts::value<std::string>()->default_value(""))
 		("i,in", "Input file", cxxopts::value<std::string>())
@@ -78,6 +80,8 @@ int main(int argc, char **argv) {
 			std::cout << options.help();
 			return 0;
 		}
+
+		if (cmd.count("verbose")) global_verbose=true;
 
 		if (cmd.count("list-formats")) {
 			puts("Supported formats / file extensions:");
@@ -143,7 +147,7 @@ int main(int argc, char **argv) {
 	}
 
 	do {
-		puts("tick");
+		if (global_verbose) puts("tick");
 		double hertz = player->getrefresh();
 		double sleep_samples = 44100 / hertz;
 		thisopl.insert_sleep(round(sleep_samples));
