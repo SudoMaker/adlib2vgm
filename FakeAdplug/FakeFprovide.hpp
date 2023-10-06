@@ -25,6 +25,7 @@
 
 #include "../binio/binio.h"
 #include "../binio/binfile.h"
+#include "../binio/binstr.h"
 
 class CFileProvider
 {

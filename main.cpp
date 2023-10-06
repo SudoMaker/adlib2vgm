@@ -51,6 +51,9 @@ std::unordered_map<std::string, std::function<std::unique_ptr<CPlayer>()>> forma
 
 	// LDS: Loudness Sound System by Andras Molnar
 	{"LDS", []{return std::make_unique<CldsPlayer>(&thisopl);}},
+
+	// ROL: AdLib Visual Composer by Ad Lib Inc.
+	{"ROL", []{return std::make_unique<CrolPlayer>(&thisopl);}},
 };
 
 int main(int argc, char **argv) {
