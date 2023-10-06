@@ -45,6 +45,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - SCI: Sierra AdLib Music
 - A2M: AdLib Tracker 2
 - S3M: Scream Tracker 3 AdLib
+- RAW: Raw AdLib Capture
 
 Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 

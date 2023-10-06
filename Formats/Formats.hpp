@@ -32,3 +32,4 @@
 #include "a2m.h"
 #include "s3m.h"
 #include "raw.h"
+#include "u6m.h"

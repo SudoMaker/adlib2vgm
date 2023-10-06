@@ -65,6 +65,8 @@ std::unordered_map<std::string, struct format> format_list = {
                []{return std::make_unique<Cs3mPlayer>(&thisopl);} } },
 	{ "RAW", { "Raw AdLib Capture",
                []{return std::make_unique<CrawPlayer>(&thisopl);} } },
+	{ "U6M", { "Ultima 6 Music",
+               []{return std::make_unique<Cu6mPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
