@@ -32,7 +32,7 @@ struct format {
     std::function<std::unique_ptr<CPlayer>()> player;
 };
 
-std::unordered_map<std::string, struct format> format_list = {
+std::map<std::string, struct format> format_list = {
 	{ "CMF", { "Creative Music File Format by Creative Technology",
                []{return std::make_unique<CcmfPlayer>(&thisopl);} } },
 	{ "RAD", { "Reality ADlib Tracker by Reality",
