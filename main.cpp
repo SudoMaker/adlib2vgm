@@ -45,8 +45,6 @@ std::unordered_map<std::string, struct format> format_list = {
                []{return std::make_unique<CrixPlayer>(&thisopl);} } },
 	{ "MID", { "MIDI Audio File Format",
                []{return std::make_unique<CmidPlayer>(&thisopl);} } },
-	{ "MIDI",{ "MIDI Audio File Format",
-               []{return std::make_unique<CmidPlayer>(&thisopl);} } },
 	{ "MUS", { "AdLib MIDI Music Format by Ad Lib Inc.",
                []{return std::make_unique<CmusPlayer>(&thisopl);} } },
 	{ "LDS", { "Loudness Sound System by Andras Molnar",
