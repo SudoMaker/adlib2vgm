@@ -43,6 +43,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - LDS: Loudness Sound System by Andras Molnar
 - LAA: Lucas Arts Adlib music
 - SCI: Sierra AdLib Music
+- A2M: AdLib Tracker 2
 
 Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 
