@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
 		("o,out", "Output file", cxxopts::value<std::string>())
 		;
 
-	std::string mode, input_file, output_file, format;
+	std::string mode, input_file, output_file, format, format_name;
 
 	try {
 		auto cmd = options.parse(argc, argv);
@@ -135,6 +135,7 @@ int main(int argc, char **argv) {
 
 		if (it != format_list.end()) {
 			player = it->second.player();
+            format_name = it->second.name;
 		} else {
 			printf("error: file format `%s' is unsupported!\n", format.c_str());
 			return 2;
@@ -143,6 +144,8 @@ int main(int argc, char **argv) {
 		puts("error: please supply a file with proper extension, or use the -f option.");
 		return 2;
 	}
+
+    std::cout << "trying " << format << ": " << format_name << "\n";
 
 	if (!player->load(input_file, CProvider_Filesystem())) {
 		puts("error: failed to open file");
