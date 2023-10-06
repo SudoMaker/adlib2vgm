@@ -51,7 +51,7 @@ std::unordered_map<std::string, struct format> format_list = {
                []{return std::make_unique<CmusPlayer>(&thisopl);} } },
 	{ "LDS", { "Loudness Sound System by Andras Molnar",
                []{return std::make_unique<CldsPlayer>(&thisopl);} } },
-	{ "ROL", { "AdLib Visual Composer by Ad Lib Inc.",
+	{ "ROL", { "AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk, too)",
                []{return std::make_unique<CrolPlayer>(&thisopl);} } },
 };
 
