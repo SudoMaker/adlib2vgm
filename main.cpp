@@ -23,6 +23,7 @@
 
 bool global_use_opl3 = 0;
 bool global_verbose;
+bool global_debug;
 
 VgmOpl thisopl;
 
@@ -65,6 +66,7 @@ int main(int argc, char **argv) {
 		("h,help", "Show this help")
 		("l,list-formats", "List supported formats / file extensions")
 		("v,verbose", "Verbose output during conversion")
+		("d,debug", "Show input format debug information")
 		("m,mode", "Generation mode (opl2/opl3), not supported by all formats", cxxopts::value<std::string>()->default_value("opl2"))
 		("f,format", "Override auto format detection", cxxopts::value<std::string>()->default_value(""))
 		("i,in", "Input file", cxxopts::value<std::string>())
@@ -81,7 +83,8 @@ int main(int argc, char **argv) {
 			return 0;
 		}
 
-		if (cmd.count("verbose")) global_verbose=true;
+		if (cmd.count("verbose")) global_verbose = true;
+		if (cmd.count("debug"))   global_debug   = true;
 
 		if (cmd.count("list-formats")) {
 			puts("Supported formats / file extensions:");
