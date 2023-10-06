@@ -33,3 +33,4 @@
 #include "s3m.h"
 #include "raw.h"
 #include "u6m.h"
+#include "sa2.h"

@@ -47,6 +47,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - S3M: Scream Tracker 3 AdLib
 - RAW: Raw AdLib Capture
 - U6M: Ultima 6 Music
+- SA2: Surprise AdLib Tracker
 
 Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 
