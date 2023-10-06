@@ -45,6 +45,6 @@ public:
 class CProvider_Filesystem: public CFileProvider
 {
 public:
-	virtual binistream *open(std::string filename) const;
-	virtual void close(binistream *f) const;
+	binistream *open(std::string filename) const override;
+	void close(binistream *f) const override;
 };

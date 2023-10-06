@@ -29,23 +29,23 @@ class CmodPlayer: public CPlayer
 {
 public:
   CmodPlayer(Copl *newopl);
-  virtual ~CmodPlayer();
+  ~CmodPlayer() override;
 
-  bool update();
-  void rewind(int subsong);
-  float getrefresh();
+  bool update() override;
+  void rewind(int subsong) override;
+  float getrefresh() override;
 
-  unsigned int getpatterns()
+  unsigned int getpatterns() override
     { return nop; }
-  unsigned int getpattern()
+  unsigned int getpattern() override
     { return order[ord]; }
-  unsigned int getorders()
+  unsigned int getorders() override
     { return length; }
-  unsigned int getorder()
+  unsigned int getorder() override
     { return ord; }
-  unsigned int getrow()
+  unsigned int getrow() override
     { return rw; }
-  unsigned int getspeed()
+  unsigned int getspeed() override
     { return speed; }
 
  protected:

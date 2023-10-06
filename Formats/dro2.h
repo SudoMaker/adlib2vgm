@@ -52,19 +52,19 @@ class Cdro2Player: public CPlayer
 		static CPlayer *factory(Copl *newopl);
 
 		Cdro2Player(Copl *newopl);
-		~Cdro2Player();
+		~Cdro2Player() override;
 
-		bool load(const std::string &filename, const CFileProvider &fp);
-		bool update();
-		void rewind(int subsong);
-		float getrefresh();
+		bool load(const std::string &filename, const CFileProvider &fp) override;
+		bool update() override;
+		void rewind(int subsong) override;
+		float getrefresh() override;
 
-		std::string gettype()
+		std::string gettype() override
 		{
 			return std::string("DOSBox Raw OPL v2.0");
 		}
 
-		std::string gettitle() { return std::string(title, 0, 40); };
-		std::string getauthor() { return std::string(author, 0, 40); };
-		std::string getdesc() { return std::string(desc, 0, 1023); };
+		std::string gettitle() override { return std::string(title, 0, 40); };
+		std::string getauthor() override { return std::string(author, 0, 40); };
+		std::string getdesc() override { return std::string(desc, 0, 1023); };
 };

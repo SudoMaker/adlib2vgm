@@ -31,13 +31,13 @@ public:
 		: CmodPlayer(newopl)
 	{ }
 
-	bool load(const std::string &filename, const CFileProvider &fp);
+	bool load(const std::string &filename, const CFileProvider &fp) override;
 
-	std::string gettype();
-	std::string gettitle();
-	unsigned int getinstruments()
+	std::string gettype() override;
+	std::string gettitle() override;
+	unsigned int getinstruments() override
 	{ return 31; }
-	std::string getinstrument(unsigned int n)
+	std::string getinstrument(unsigned int n) override
 	{
 	  if (n < 29)
 	    return std::string(&instname[n][1], 16);

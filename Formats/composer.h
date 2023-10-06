@@ -59,31 +59,31 @@ public:
 
     CcomposerBackend(Copl * const pNewOpl);
 
-    ~CcomposerBackend()
+    ~CcomposerBackend() override
     {
     };
 
-    virtual bool load(const std::string &filename, const CFileProvider &fp)
+    bool load(const std::string &filename, const CFileProvider &fp) override
     {
         UNUSED(filename);
         UNUSED(fp);
         return false;
     };
-    virtual bool update()
+    bool update() override
     {
         return false;
     };
     virtual void frontend_rewind(int subsong) = 0;
-    virtual void rewind(int subsong);	// rewinds to specified subsong
-    virtual float getrefresh()			// returns needed timer refresh rate
+    void rewind(int subsong) override;	// rewinds to specified subsong
+    float getrefresh() override			// returns needed timer refresh rate
     {
         return 1.0f;
     };
 
-    virtual std::string gettype() { return std::string("AdLib Visual Composer"); }
-    virtual unsigned int getinstruments() { return 0; };
-    virtual std::string getinstrument(unsigned int n) { UNUSED(n); return std::string(); };
-    virtual std::string getdesc() { return std::string(); };
+    std::string gettype() override { return std::string("AdLib Visual Composer"); }
+    unsigned int getinstruments() override { return 0; };
+    std::string getinstrument(unsigned int n) override { UNUSED(n); return std::string(); };
+    std::string getdesc() override { return std::string(); };
 
     typedef struct
     {

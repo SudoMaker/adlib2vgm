@@ -29,24 +29,24 @@ public:
   static CPlayer *factory(Copl *newopl);
 
   CmidPlayer(Copl *newopl);
-  ~CmidPlayer()
+  ~CmidPlayer() override
     { if(data) delete [] data; }
 
-  bool load(const std::string &filename, const CFileProvider &fp);
-  bool update();
-  void rewind(int subsong);
-  float getrefresh();
+  bool load(const std::string &filename, const CFileProvider &fp) override;
+  bool update() override;
+  void rewind(int subsong) override;
+  float getrefresh() override;
 
-  std::string gettype();
-  std::string gettitle()
+  std::string gettype() override;
+  std::string gettitle() override
     { return std::string(title); }
-  std::string getauthor()
+  std::string getauthor() override
     { return std::string(author); }
-  std::string getdesc()
+  std::string getdesc() override
     { return std::string(remarks); }
-  unsigned int getinstruments()
+  unsigned int getinstruments() override
     { return tins; }
-  unsigned int getsubsongs()
+  unsigned int getsubsongs() override
     { return subsongs; }
 
  protected:

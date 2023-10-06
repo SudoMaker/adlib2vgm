@@ -31,22 +31,22 @@ public:
 	Cd00Player(Copl *newopl)
 		: CPlayer(newopl), filedata(0)
 	{ };
-	~Cd00Player()
+	~Cd00Player() override
 	{ if(filedata) delete [] filedata; };
 
-	bool load(const std::string &filename, const CFileProvider &fp);
-	bool update();
-	void rewind(int subsong);
-	float getrefresh();
+	bool load(const std::string &filename, const CFileProvider &fp) override;
+	bool update() override;
+	void rewind(int subsong) override;
+	float getrefresh() override;
 
-	std::string gettype();
-	std::string gettitle()
+	std::string gettype() override;
+	std::string gettitle() override
 	{ if(version > 1) return std::string(header->songname); else return std::string(); };
-	std::string getauthor()
+	std::string getauthor() override
 	{ if(version > 1) return std::string(header->author); else return std::string(); };
-	std::string getdesc()
+	std::string getdesc() override
 	{ if(*datainfo) return std::string(datainfo); else return std::string(); };
-	unsigned int getsubsongs();
+	unsigned int getsubsongs() override;
 
 protected:
 #pragma pack(1)

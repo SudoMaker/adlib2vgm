@@ -32,18 +32,18 @@ public:
   Ca2mLoader(Copl *newopl): CmodPlayer(newopl)
     { }
 
-  bool load(const std::string &filename, const CFileProvider &fp);
-  float getrefresh();
+  bool load(const std::string &filename, const CFileProvider &fp) override;
+  float getrefresh() override;
 
-  std::string gettype()
+  std::string gettype() override
     { return std::string("AdLib Tracker 2"); }
-  std::string gettitle()
+  std::string gettitle() override
     { return std::string(songname + 1, *songname); }
-  std::string getauthor()
+  std::string getauthor() override
     { return std::string(author + 1, *author); }
-  unsigned int getinstruments()
+  unsigned int getinstruments() override
     { return NUMINST; }
-  std::string getinstrument(unsigned int n)
+  std::string getinstrument(unsigned int n) override
   { return n < NUMINST ? std::string(instname[n] + 1, *instname[n]) : std::string(); }
 
 private:

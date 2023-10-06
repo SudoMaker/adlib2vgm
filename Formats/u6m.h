@@ -38,17 +38,17 @@ class Cu6mPlayer: public CPlayer
     };
 
 
-  ~Cu6mPlayer()
+  ~Cu6mPlayer() override
     {
       if(song_data) delete[] song_data;
     };
 
-  bool load(const std::string &filename, const CFileProvider &fp);
-  bool update();
-  void rewind(int subsong);
-  float getrefresh();
+  bool load(const std::string &filename, const CFileProvider &fp) override;
+  bool update() override;
+  void rewind(int subsong) override;
+  float getrefresh() override;
 
-  std::string gettype()
+  std::string gettype() override
     {
       return std::string("Ultima 6 Music");
     };

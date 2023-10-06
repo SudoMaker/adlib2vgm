@@ -74,35 +74,35 @@ public:
 	CmusPlayer(Copl *newopl)
 		: CPlayer(newopl), drv(0), data(0), insts(0)
 		{ }
-	~CmusPlayer()
+	~CmusPlayer() override
 	{
 		if (data) delete [] data;
 		if (insts) delete[] insts;
 		if (drv) delete drv;
 	};
 
-	bool load(const std::string &filename, const CFileProvider &fp);
-	bool update();
-	void rewind(int subsong);
+	bool load(const std::string &filename, const CFileProvider &fp) override;
+	bool update() override;
+	void rewind(int subsong) override;
 
-	float getrefresh()
+	float getrefresh() override
 	{
 		return timer;
 	};
 
-	std::string gettitle()
+	std::string gettitle() override
 	{
 		return std::string(tuneName);
 	};
 
-	std::string gettype();
+	std::string gettype() override;
 
-	unsigned int getinstruments()
+	unsigned int getinstruments() override
 	{
 		return insts ? nrTimbre : 0;
 	};
 
-	std::string getinstrument(unsigned int n)
+	std::string getinstrument(unsigned int n) override
 	{
 		return insts && n < nrTimbre ? (insts[n].loaded ? std::string(insts[n].name) : std::string("[N/A] ").append(insts[n].name)) : std::string();
 	};

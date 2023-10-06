@@ -32,7 +32,7 @@ public:
 
 	VgmOpl(const std::string &filename);
 
-	virtual ~VgmOpl() = default;
+	~VgmOpl() override = default;
 
 	void init() override {}
 	void write(int reg, int val) override;
