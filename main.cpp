@@ -21,7 +21,7 @@
 #include "VgmOpl.hpp"
 #include "Formats/Formats.hpp"
 
-bool global_use_opl3 = 0;
+bool global_use_opl3;
 bool global_verbose;
 bool global_debug;
 
