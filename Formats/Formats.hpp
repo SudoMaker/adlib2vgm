@@ -30,3 +30,4 @@
 #include "lds.h"
 #include "rol.h"
 #include "a2m.h"
+#include "s3m.h"

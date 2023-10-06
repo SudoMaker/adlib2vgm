@@ -44,6 +44,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - LAA: Lucas Arts Adlib music
 - SCI: Sierra AdLib Music
 - A2M: AdLib Tracker 2
+- S3M: Scream Tracker 3 AdLib
 
 Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 
