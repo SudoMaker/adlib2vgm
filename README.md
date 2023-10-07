@@ -46,9 +46,14 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - DRO2: DOSBox Raw OPL Format
 - DTM: DeFy AdLib Tracker
 - GOT: God Of Thunder Player
+- HSC: HSC Adlib Composer / HSC-Tracker
 - IMF: Apogee (id/3D Realms) Music File
+- JBM: Johannes Bjerregaard's JBM Adlib Music Format
+- KSM: Ken Silverman Music (requires insts.dat)
 - LAA: Lucas Arts Adlib Music
 - LDS: Loudness Sound System by Andras Molnar
+- MAD: Mlat Adlib Tracker
+- MDI: AdLib Visual Composer MIDIPlay File
 - MID: MIDI Audio File Format
 - MUS: AdLib MIDI Music Format by Ad Lib Inc.
 - RAD: Reality ADlib Tracker by Reality
