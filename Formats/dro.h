@@ -30,7 +30,7 @@
 
 #pragma once
 #include <stdint.h> // for uintxx_t
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 class CdroPlayer: public CPlayer
 {

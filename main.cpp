@@ -17,10 +17,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "CommonIncludes.hpp"
-#include "VgmOpl.hpp"
-#include "Formats/Formats.hpp"
-#include "cxxopts.hpp"
+#include "CommonIncludes.h"
+#include "VgmOpl.h"
+#include "Formats/Formats.h"
+#include "cxxopts.h"
 
 bool global_use_opl3;
 bool global_verbose;

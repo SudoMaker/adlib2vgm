@@ -23,7 +23,7 @@
 
 #include <stdint.h> // for uintxx_t
 
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 typedef struct {
 	uint16_t iInstrumentBlockOffset;

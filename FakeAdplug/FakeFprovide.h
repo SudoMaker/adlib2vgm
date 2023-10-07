@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "../CommonIncludes.hpp"
+#include "../CommonIncludes.h"
 
 #include "../binio/binio.h"
 #include "../binio/binfile.h"

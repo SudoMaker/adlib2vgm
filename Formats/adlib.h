@@ -25,7 +25,7 @@
 
 #include "stdint.h"
 
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 /* Parameters of each voice: */
 #define nbLocParam		14

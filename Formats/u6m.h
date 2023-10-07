@@ -23,7 +23,7 @@
 #include <stack>
 
 //#include "player.h"
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 #define default_dict_size 4096     // because maximum codeword size == 12 bits
 #define max_codeword_length 12     // maximum codeword length in bits

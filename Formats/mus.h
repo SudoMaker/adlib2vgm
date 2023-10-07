@@ -31,7 +31,7 @@
 
 #pragma once
 
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 #include "adlib.h"
 
 #define SYSTEM_XOR_BYTE		0xF0

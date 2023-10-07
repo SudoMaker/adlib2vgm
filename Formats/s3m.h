@@ -23,7 +23,7 @@
 #define H_ADPLUG_S3M
 
 //#include "player.h"
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 class Cs3mPlayer: public CPlayer
 {

@@ -17,7 +17,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "VgmOpl.hpp"
+#include "VgmOpl.h"
 
 const unsigned char VgmOpl::op_table[9] = {0x00, 0x01, 0x02, 0x08, 0x09, 0x0a, 0x10, 0x11, 0x12};
 

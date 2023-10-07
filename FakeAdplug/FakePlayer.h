@@ -21,10 +21,10 @@
 
 #pragma once
 
-#include "../CommonIncludes.hpp"
+#include "../CommonIncludes.h"
 
-#include "FakeFprovide.hpp"
-#include "FakeOpl.hpp"
+#include "FakeFprovide.h"
+#include "FakeOpl.h"
 
 class CPlayer
 {

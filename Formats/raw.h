@@ -28,7 +28,7 @@
  */
 
 //#include "player.h"
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 class CrawPlayer: public CPlayer
 {

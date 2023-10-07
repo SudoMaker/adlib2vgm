@@ -28,7 +28,7 @@
 #include <string>
 
 //#include "player.h"
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 // These are here since Visual C 6 doesn't support statics declared and defined in class.
 #define INS_MAX_NAME_SIZE  9U

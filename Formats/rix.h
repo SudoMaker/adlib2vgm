@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 class CrixPlayer: public CPlayer
 {

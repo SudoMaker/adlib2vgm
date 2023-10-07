@@ -19,7 +19,7 @@
  * player.cpp - Replayer base class, by Simon Peter <dn.tlp@gmx.net>
  */
 
-#include "FakePlayer.hpp"
+#include "FakePlayer.h"
 
 const unsigned short CPlayer::note_table[12] =
 	{363, 385, 408, 432, 458, 485, 514, 544, 577, 611, 647, 686};

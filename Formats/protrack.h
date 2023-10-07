@@ -23,7 +23,7 @@
 #define H_PROTRACK
 
 //#include "player.h"
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 class CmodPlayer: public CPlayer
 {

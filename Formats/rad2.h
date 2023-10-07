@@ -23,7 +23,7 @@
 #define H_ADPLUG_RAD2PLAYER
 
 //#include "player.h"
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 class RADPlayer;
 

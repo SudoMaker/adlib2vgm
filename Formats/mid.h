@@ -21,7 +21,7 @@
 
 #pragma once
 
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "../FakeAdplug/FakeAdplug.h"
 
 class CmidPlayer: public CPlayer
 {

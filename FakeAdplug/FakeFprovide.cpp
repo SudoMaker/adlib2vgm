@@ -19,7 +19,7 @@
  * fprovide.cpp - File provider class framework, by Simon Peter <dn.tlp@gmx.net>
  */
 
-#include "FakeFprovide.hpp"
+#include "FakeFprovide.h"
 
 /***** CFileProvider *****/
 
