@@ -104,6 +104,12 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CfmcLoader>(&thisopl);} } },
 	{ "GOT", { "God Of Thunder Player",
                []{return std::make_unique<CgotPlayer>(&thisopl);} } },
+	{ "AGD", { "HERAD Herbulot AdLib Player",
+               []{return std::make_unique<CheradPlayer>(&thisopl);} } },
+	{ "SDB", { "HERAD Herbulot AdLib Player",
+               []{return std::make_unique<CheradPlayer>(&thisopl);} } },
+	{ "SQX", { "HERAD Herbulot AdLib Player",
+               []{return std::make_unique<CheradPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {

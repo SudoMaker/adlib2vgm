@@ -49,3 +49,4 @@
 #include "rat.h"
 #include "fmc.h"
 #include "got.h"
+#include "herad.h"
