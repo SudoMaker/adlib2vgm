@@ -221,7 +221,7 @@ int main(int argc, char **argv) {
 		return 2;
 	}
 
-    printf("using %s: %s\n", format.c_str(), format_name.c_str());
+    printf("using loader %s: %s\n", format.c_str(), format_name.c_str());
 
 	if (!player->load(input_file, CProvider_Filesystem())) {
 		puts("error: failed to open file");
