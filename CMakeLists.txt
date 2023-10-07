@@ -22,12 +22,6 @@ CPMAddPackage(
         GIT_TAG 2d8e17c4f88efce80e274cb03eeb902e055a91d3
 )
 
-CPMAddPackage(
-        NAME IODash
-        GITHUB_REPOSITORY YukiWorkshop/IODash
-        VERSION 0.1.8
-)
-
 set (CMAKE_CXX_FLAGS "-DDEBUG -O3 -W -Wall")
 set (CMAKE_EXE_LINKER_FLAGS "-static -s")
 
@@ -45,4 +39,4 @@ add_executable(adlib2vgm
         VgmOpl.cpp VgmOpl.hpp
         )
 
-target_link_libraries(adlib2vgm IODash stdc++fs)
+target_link_libraries(adlib2vgm stdc++fs)

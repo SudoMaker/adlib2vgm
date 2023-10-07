@@ -35,7 +35,6 @@
 #include <fcntl.h>
 
 #include <cxxopts.hpp>
-#include <IODash.hpp>
 
 #define stricmp			strcasecmp
 #define AdPlug_LogWrite(...)		if (global_debug) printf(__VA_ARGS__)

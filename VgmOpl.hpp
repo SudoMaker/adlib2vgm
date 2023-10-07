@@ -20,8 +20,8 @@
 #pragma once
 
 #include "CommonIncludes.hpp"
-
 #include "FakeAdplug/FakeAdplug.hpp"
+#include <fstream>
 
 class VgmOpl: public Copl {
 public:
@@ -42,7 +42,7 @@ public:
 protected:
 	static const unsigned char	op_table[9];
 
-	IODash::File file;
+	std::ofstream *file;
 	uint32_t sample_count = 0;
 	std::vector<uint8_t> buffer;
 	uint16_t buffered_sleep_samples = 0;

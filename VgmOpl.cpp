@@ -22,7 +22,7 @@
 const unsigned char VgmOpl::op_table[9] = {0x00, 0x01, 0x02, 0x08, 0x09, 0x0a, 0x10, 0x11, 0x12};
 
 VgmOpl::VgmOpl(const std::string &filename) {
-	file.open(filename, O_CREAT|O_TRUNC|O_WRONLY, 0644);
+	file = new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary);
 
 	uint8_t buf[128] = "Vgm ";
 
@@ -101,5 +101,5 @@ void VgmOpl::save() {
 	// Total # samples
 	*((uint32_t *)&buffer[0x18]) = sample_count;
 
-	file.write_all(buffer);
+	file->write(reinterpret_cast<const char *>(&buffer[0]), buffer.size());
 }
