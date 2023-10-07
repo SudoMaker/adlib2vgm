@@ -74,6 +74,10 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<Csa2Loader>(&thisopl);} } },
 	{ "AMD", { "AMUSIC AdLib Tracker",
                []{return std::make_unique<CamdLoader>(&thisopl);} } },
+	{ "IMF", { "Apogee (id/3D Realms) Music File",
+               []{return std::make_unique<CimfPlayer>(&thisopl);} } },
+	{ "WLF", { "Wolfenstein 3D Music File",
+               []{return std::make_unique<CimfPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
