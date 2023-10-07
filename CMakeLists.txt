@@ -21,5 +21,3 @@ add_executable(adlib2vgm
         main.cpp
         VgmOpl.cpp
         )
-
-target_link_libraries(adlib2vgm stdc++fs)
