@@ -56,3 +56,4 @@
 #include "mad.h"
 #include "mdi.h"
 #include "pis.h"
+#include "sng.h"
