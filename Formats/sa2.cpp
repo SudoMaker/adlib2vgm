@@ -24,7 +24,7 @@
 #include <cstdio>
 
 #include "sa2.h"
-//#include "debug.h"
+#include "debug.h"
 
 CPlayer *Csa2Loader::factory(Copl *newopl)
 {
@@ -167,7 +167,7 @@ bool Csa2Loader::load(const std::string &filename, const CFileProvider &fp)
     activechan = f->readInt(2) << 16;		// active channels
 
   AdPlug_LogWrite("Csa2Loader::load(\"%s\"): sat_type = %x, nop = %d, "
-		  "length = %ld, restartpos = %ld, activechan = %lx, bpm = %d\n",
+		  "length = %d, restartpos = %d, activechan = %x, bpm = %d\n",
 		  filename.c_str(), sat_type, nop, length, restartpos, activechan, bpm);
 
   // track data

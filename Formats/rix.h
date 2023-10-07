@@ -20,9 +20,7 @@
  *                                           BSPAL <BSPAL.ys168.com>
  */
 
-#pragma once
-
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class CrixPlayer: public CPlayer
 {
@@ -30,18 +28,20 @@ class CrixPlayer: public CPlayer
   static CPlayer *factory(Copl *newopl);
 
   CrixPlayer(Copl *newopl);
-  ~CrixPlayer() override;
+  ~CrixPlayer();
 
-  bool load(const std::string &filename, const CFileProvider &fp) override;
-  bool update() override;
-  void rewind(int subsong) override;
-  float getrefresh() override;
-  uint32_t getsubsongs() override;
+  bool load(const std::string &filename, const CFileProvider &fp);
+  bool update();
+  void rewind(int subsong);
+  float getrefresh();
+  uint32_t getsubsongs();
+  unsigned int getsubsong();
 
-  std::string gettype() override
+  std::string gettype()
     { return std::string("Softstar RIX OPL Music Format"); };
 
  protected:	
+  int song = 0;
   typedef struct {
     uint8_t v[14];
   } ADDT;

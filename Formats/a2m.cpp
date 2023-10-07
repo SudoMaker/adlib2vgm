@@ -73,14 +73,9 @@ bool Ca2mLoader::load(const std::string &filename, const CFileProvider &fp)
   unsigned char numpats = f->readInt(1);
 
   // file validation section
-  if (memcmp(id, "_A2module_", sizeof(id))) {
-      AdPlug_LogError("_A2module_ signature not found\n");
-      fp.close(f);
-      return false;
-  }
-  if ((version != 1 && version != 5 && version != 4 && version != 8) ||
+  if (memcmp(id, "_A2module_", sizeof(id)) ||
+      (version != 1 && version != 5 && version != 4 && version != 8) ||
       numpats < 1 || numpats > 64) {
-    AdPlug_LogError("unsupported version %d\n", version);
     fp.close(f);
     return false;
   }

@@ -19,9 +19,7 @@
  * mid.h - LAA, SCI, MID & CMF Player by Philip Hassey <philhassey@hotmail.com>
  */
 
-#pragma once
-
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class CmidPlayer: public CPlayer
 {
@@ -29,24 +27,24 @@ public:
   static CPlayer *factory(Copl *newopl);
 
   CmidPlayer(Copl *newopl);
-  ~CmidPlayer() override
+  ~CmidPlayer()
     { if(data) delete [] data; }
 
-  bool load(const std::string &filename, const CFileProvider &fp) override;
-  bool update() override;
-  void rewind(int subsong) override;
-  float getrefresh() override;
+  bool load(const std::string &filename, const CFileProvider &fp);
+  bool update();
+  void rewind(int subsong);
+  float getrefresh();
 
-  std::string gettype() override;
-  std::string gettitle() override
+  std::string gettype();
+  std::string gettitle()
     { return std::string(title); }
-  std::string getauthor() override
+  std::string getauthor()
     { return std::string(author); }
-  std::string getdesc() override
+  std::string getdesc()
     { return std::string(remarks); }
-  unsigned int getinstruments() override
+  unsigned int getinstruments()
     { return tins; }
-  unsigned int getsubsongs() override
+  unsigned int getsubsongs()
     { return subsongs; }
 
  protected:
@@ -81,6 +79,7 @@ public:
   int adlib_style;
   int adlib_mode;
   unsigned char myinsbank[128][16], smyinsbank[128][16];
+  int midi_type;
   midi_channel ch[16];
   int chp[18][3];
 
@@ -94,14 +93,15 @@ public:
   unsigned long iwait;
   int doing;
 
-  unsigned long int type,tins,stins;
+  int type,tins,stins;
 
  private:
   bool load_sierra_ins(const std::string &fname, const CFileProvider &fp);
   void midiprintf(const char *format, ...);
-  unsigned char datalook(long pos);
+  unsigned char datalook(unsigned long pos);
   unsigned long getnexti(unsigned long num);
   unsigned long getnext(unsigned long num);
+  void readString(char *dst, unsigned long num);
   unsigned long getval();
   void sierra_next_section();
   void midi_write_adlib(unsigned int r, unsigned char v);

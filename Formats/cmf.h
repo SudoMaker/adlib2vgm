@@ -19,11 +19,8 @@
  * cmf.h - CMF player by Adam Nielsen <malvineous@shikadi.net>
  */
 
-#pragma once
-
 #include <stdint.h> // for uintxx_t
-
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 typedef struct {
 	uint16_t iInstrumentBlockOffset;
@@ -91,18 +88,18 @@ class CcmfPlayer: public CPlayer
 		static CPlayer *factory(Copl *newopl);
 
 		CcmfPlayer(Copl *newopl);
-		~CcmfPlayer() override;
+		~CcmfPlayer();
 
-		bool load(const std::string &filename, const CFileProvider &fp) override;
-		bool update() override;
-		void rewind(int subsong) override;
-		float getrefresh() override;
+		bool load(const std::string &filename, const CFileProvider &fp);
+		bool update();
+		void rewind(int subsong);
+		float getrefresh();
 
-		std::string gettype() override
+		std::string gettype()
 			{ return std::string("Creative Music File (CMF)"); };
-		std::string gettitle() override;
-		std::string getauthor() override;
-		std::string getdesc() override;
+		std::string gettitle();
+		std::string getauthor();
+		std::string getdesc();
 
 	protected:
 		uint32_t readMIDINumber();

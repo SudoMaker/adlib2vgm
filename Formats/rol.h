@@ -42,22 +42,22 @@ public:
 
     explicit CrolPlayer(Copl * const pNewOpl);
 
-    ~CrolPlayer() override;
+    ~CrolPlayer();
 
-    bool  load      (const std::string &filename, const CFileProvider &fp) override;
-    bool  update    () override;
-    void  frontend_rewind(int subsong) override;	// rewinds to specified subsong
-    float getrefresh() override;			// returns needed timer refresh rate
+    bool  load      (const std::string &filename, const CFileProvider &fp);
+    bool  update    ();
+    void  frontend_rewind(int subsong);	// rewinds to specified subsong
+    float getrefresh();			// returns needed timer refresh rate
 
-    unsigned int getinstruments() override
+    unsigned int getinstruments()
     {
         return usedInstruments.size();
     };
-    std::string getinstrument(unsigned int n) override
+    std::string getinstrument(unsigned int n)
     {
         return n < usedInstruments.size() ? usedInstruments[n] : std::string();
     };
-    std::string getdesc() override
+    std::string getdesc()
     {
         return std::string(mpROLHeader->comment);
     };

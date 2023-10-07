@@ -25,7 +25,7 @@
 */
 
 #include "rad2.h"
-//#include "debug.h"
+#include "debug.h"
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
@@ -1809,11 +1809,7 @@ void RADPlayer::Transpose(int8_t note, int8_t octave) {
 // prior to initial playback.
 //==================================================================================================
 #if RAD_DETECT_REPEATS
-static void RADPlayerDummyOPL3(void *arg, uint16_t reg, uint8_t data) {
-    UNUSED(arg);
-    UNUSED(reg);
-    UNUSED(data);
-}
+static void RADPlayerDummyOPL3(void *arg, uint16_t reg, uint8_t data) {}
 //--------------------------------------------------------------------------------------------------
 uint32_t RADPlayer::ComputeTotalTime() {
 
@@ -1915,7 +1911,7 @@ bool Crad2Player::load(const std::string &filename, const CFileProvider &fp) {
 		}
 	}
 	else {
-		AdPlug_LogError("Crad2Player::load(\"%s\"): %s\n", filename.c_str(), err);
+		AdPlug_LogWrite("Crad2Player::load(\"%s\"): %s\n", filename.c_str(), err);
 	}
 
 	delete[] newdata;

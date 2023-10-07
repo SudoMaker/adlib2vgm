@@ -29,10 +29,10 @@
  * http://www.vgmpf.com/Wiki/index.php?title=SND_(AdLib)
  */
 
-#pragma once
+#ifndef H_ADPLUG_MUSPLAYER
+#define H_ADPLUG_MUSPLAYER
 
-#include "../FakeAdplug/FakeAdplug.h"
-#include "adlib.h"
+#include "composer.h"
 
 #define SYSTEM_XOR_BYTE		0xF0
 #define EOX_BYTE			0xF7
@@ -52,59 +52,60 @@
 
 #define TUNE_NAME_SIZE		30
 #define FILLER_SIZE			8
-#define TIMBRE_NAME_SIZE	9
-#define TIMBRE_DEF_LEN		ADLIB_INST_LEN
-#define TIMBRE_DEF_SIZE 	(TIMBRE_DEF_LEN * sizeof(int16_t))
+#define TIMBRE_DEF_SIZE 	(ADLIB_INST_LEN * sizeof(int16_t))
 #define OVERFLOW_TICKS		240
 #define MAX_SEC_DELAY		10.0f	/* Wraithverge: changed this to float, to avoid casting */
 #define HEADER_LEN			70
 #define SND_HEADER_LEN		6
 #define IMS_SIGNATURE		0x7777
 
-#define BNK_HEADER_SIZE		28
-#define BNK_SIGNATURE_LEN	6
-#define BNK_NAME_SIZE		12
-#define BNK_INST_SIZE		30
+#define KNOWN_MUS_EXT		"mus", "mdy", "ims"
+#define KNOWN_SND_EXT		"snd", "tim", "tbr"
+#define KNOWN_SND_NAME		"", "timbres"
+#define KNOWN_BNK_NAME		"", "implay", "standard"
 
-class CmusPlayer: public CPlayer
+class CmusPlayer: public CcomposerBackend
 {
 public:
 	static CPlayer *factory(Copl *newopl);
 
 	CmusPlayer(Copl *newopl)
-		: CPlayer(newopl), drv(0), data(0), insts(0)
+		: CcomposerBackend(newopl), data(0), insts(0)
 		{ }
-	~CmusPlayer() override
+	~CmusPlayer()
 	{
 		if (data) delete [] data;
 		if (insts) delete[] insts;
-		if (drv) delete drv;
 	};
 
-	bool load(const std::string &filename, const CFileProvider &fp) override;
-	bool update() override;
-	void rewind(int subsong) override;
+	bool load(const std::string &filename, const CFileProvider &fp);
+	bool update();
+	void frontend_rewind(int subsong);
 
-	float getrefresh() override
+	float getrefresh()
 	{
 		return timer;
 	};
 
-	std::string gettitle() override
+	std::string gettitle()
 	{
 		return std::string(tuneName);
 	};
 
-	std::string gettype() override;
+	std::string gettype();
 
-	unsigned int getinstruments() override
+	unsigned int getinstruments()
 	{
 		return insts ? nrTimbre : 0;
 	};
 
-	std::string getinstrument(unsigned int n) override
+	std::string getinstrument(unsigned int n)
 	{
-		return insts && n < nrTimbre ? (insts[n].loaded ? std::string(insts[n].name) : std::string("[N/A] ").append(insts[n].name)) : std::string();
+		return insts && n < nrTimbre ?
+			(insts[n].backend_index >= 0 ?
+				std::string(insts[n].name) :
+				std::string(insts[n].name).append(" (missing)")
+			) : std::string();
 	};
 
 private:
@@ -114,7 +115,6 @@ private:
 	void SetTempo(uint16_t tempo, uint8_t tickBeat);
 	uint32_t GetTicks();
 	void executeCommand();
-	CadlibDriver *drv;
 
 protected:
 	/* variables for playback */
@@ -142,11 +142,12 @@ protected:
 
 	/* variables for timbre bank */
 	struct mus_inst {
-		char	name[TIMBRE_NAME_SIZE];
-		bool	loaded;
-		int16_t	data[TIMBRE_DEF_LEN];
+		char	name[INS_MAX_NAME_SIZE];
+		int		backend_index;
 	};
 
 	uint16_t	nrTimbre;			/* # of definitions in bank. */
 	mus_inst *	insts;					/* instrument definitions */
 };
+
+#endif

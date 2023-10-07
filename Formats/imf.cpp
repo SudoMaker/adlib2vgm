@@ -174,7 +174,6 @@ bool CimfPlayer::update()
 
 void CimfPlayer::rewind(int subsong)
 {
-	UNUSED(subsong);
 	pos = 0; del = 0; timer = rate; songend = false;
 	opl->init(); opl->write(1,32);	// go to OPL2 mode
 }
@@ -199,7 +198,6 @@ std::string CimfPlayer::getdesc()
 
 float CimfPlayer::getrate(const std::string &filename, const CFileProvider &fp, binistream *f)
 {
-	UNUSED(f);
 #if 0
   if(db) {	// Database available
     f->seek(0, binio::Set);
@@ -208,6 +206,7 @@ float CimfPlayer::getrate(const std::string &filename, const CFileProvider &fp, 
       return record->clock;
   }
 #endif
+
   // Otherwise the database is either unavailable, or there's no entry for this file
   if (fp.extension(filename, ".imf")) return 560.0f;
   if (fp.extension(filename, ".wlf")) return 700.0f;

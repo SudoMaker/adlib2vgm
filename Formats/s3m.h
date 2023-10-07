@@ -22,8 +22,7 @@
 #ifndef H_ADPLUG_S3M
 #define H_ADPLUG_S3M
 
-//#include "player.h"
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class Cs3mPlayer: public CPlayer
 {
@@ -32,30 +31,30 @@ class Cs3mPlayer: public CPlayer
 
   Cs3mPlayer(Copl *newopl);
 
-  bool load(const std::string &filename, const CFileProvider &fp) override;
-  bool update() override;
-  void rewind(int subsong) override;
-  float getrefresh() override;
+  bool load(const std::string &filename, const CFileProvider &fp);
+  bool update();
+  void rewind(int subsong);
+  float getrefresh();
 
-  std::string gettype() override;
-  std::string gettitle() override
+  std::string gettype();
+  std::string gettitle()
     { return std::string(header.name); };
 
-  unsigned int getpatterns() override
+  unsigned int getpatterns()
     { return header.patnum; };
-  unsigned int getpattern() override
+  unsigned int getpattern()
     { return orders[ord]; };
-  unsigned int getorders() override
+  unsigned int getorders()
     { return (header.ordnum-1); };
-  unsigned int getorder() override
+  unsigned int getorder()
     { return ord; };
-  unsigned int getrow() override
+  unsigned int getrow()
     { return crow; };
-  unsigned int getspeed() override
+  unsigned int getspeed()
     { return speed; };
-  unsigned int getinstruments() override
+  unsigned int getinstruments()
     { return header.insnum; };
-  std::string getinstrument(unsigned int n) override
+  std::string getinstrument(unsigned int n)
     { return std::string(inst[n].name); };
 
  protected:

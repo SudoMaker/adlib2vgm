@@ -24,6 +24,7 @@
 #include <cassert>
 #include <math.h> // for pow() etc.
 #include <string.h> // for memset
+#include "debug.h"
 #include "cmf.h"
 
 // ------------------------------
@@ -123,7 +124,7 @@ bool CcmfPlayer::load(const std::string &filename, const CFileProvider &fp)
 	}
 	uint16_t iVer = f->readInt(2);
 	if ((iVer != 0x0101) && (iVer != 0x0100)) {
-		AdPlug_LogError("CMF file is not v1.0 or v1.1 (reports %d.%d)\n", iVer >> 8 , iVer & 0xFF);
+		AdPlug_LogWrite("CMF file is not v1.0 or v1.1 (reports %d.%d)\n", iVer >> 8 , iVer & 0xFF);
 		fp.close(f);
 		return false;
 	}
@@ -239,7 +240,7 @@ bool CcmfPlayer::update()
 		uint8_t iChannel = iCommand & 0x0F;
 		switch (iCommand & 0xF0) {
 			case 0x80: { // Note off (two data bytes)
-				if (this->iPlayPointer < this->iSongLen - 1) break;
+				if (this->iPlayPointer > this->iSongLen - 2) break;
 				uint8_t iNote = this->data[this->iPlayPointer++];
 				uint8_t iVelocity = this->data[this->iPlayPointer++]; // release velocity
 				this->cmfNoteOff(iChannel, iNote, iVelocity);
@@ -401,7 +402,6 @@ bool CcmfPlayer::update()
 
 void CcmfPlayer::rewind(int subsong)
 {
-  UNUSED(subsong);
   this->opl->init();
 
 	// Initialise
@@ -713,7 +713,6 @@ void CcmfPlayer::cmfNoteOn(uint8_t iChannel, uint8_t iNote, uint8_t iVelocity)
 
 void CcmfPlayer::cmfNoteOff(uint8_t iChannel, uint8_t iNote, uint8_t iVelocity)
 {
-    UNUSED(iVelocity);
 	if ((iChannel > 10) && (this->bPercussive)) {
 		int iOPLChannel = this->getPercChannel(iChannel);
 		if (this->chOPL[iOPLChannel].iMIDINote != iNote) return; // there's a different note playing now

@@ -23,7 +23,7 @@
 #include <cstring>
 
 #include "amd.h"
-//#include "debug.h"
+#include "debug.h"
 
 CPlayer *CamdLoader::factory(Copl *newopl)
 {

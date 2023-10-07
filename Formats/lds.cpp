@@ -22,6 +22,7 @@
 #include <string.h>
 
 #include "lds.h"
+#include "debug.h"
 
 // Note frequency table (16 notes / octave)
 const unsigned short CldsPlayer::frequency[] = {
@@ -145,8 +146,9 @@ bool CldsPlayer::load(const std::string &filename, const CFileProvider &fp)
 
   // load patterns
   f->ignore(2);		// ignore # of digital sounds (not played by this player)
-  patterns = new unsigned short[(fp.filesize(f) - f->pos()) / 2 + 1];
-  for(i = 0; !f->eof(); i++)
+  patterns_size = (fp.filesize(f) - f->pos()) / 2;
+  patterns = new unsigned short[patterns_size + 1];
+  for(i = 0; i < patterns_size; i++)
     patterns[i] = f->readInt(2);
 
   fp.close(f);
@@ -167,9 +169,9 @@ bool CldsPlayer::update()
   // handle fading
   if(fadeonoff) {
     if(fadeonoff <= 128) {
-      if(allvolume > fadeonoff || allvolume == 0)
+      if(allvolume > fadeonoff || allvolume == 0) {
 	allvolume -= fadeonoff;
-      else {
+      } else {
 	allvolume = 1;
 	fadeonoff = 0;
 	if(hardfade != 0) {
@@ -179,13 +181,14 @@ bool CldsPlayer::update()
 	    channel[i].keycount = 1;
 	}
       }
-    } else
-      if(((allvolume + (0x100 - fadeonoff)) & 0xff) <= mainvolume)
+    } else {
+      if(((allvolume + (0x100 - fadeonoff)) & 0xff) <= mainvolume) {
 	allvolume += 0x100 - fadeonoff;
-      else {
+      } else {
 	allvolume = mainvolume;
 	fadeonoff = 0;
       }
+    }
   }
 
   // handle channel delay
@@ -205,7 +208,11 @@ bool CldsPlayer::update()
 	unsigned short	patnum = positions[posplay * 9 + chan].patnum;
 	unsigned char	transpose = positions[posplay * 9 + chan].transpose;
 
-	comword = patterns[patnum + c->packpos];
+        if ((patnum + c->packpos) < patterns_size)
+          comword = patterns[patnum + c->packpos];
+        else
+          comword = 0x8001;
+
 	comhi = comword >> 8; comlo = comword & 0xff;
 	if(comword) {
 	  if(comhi == 0x80)
@@ -272,7 +279,7 @@ bool CldsPlayer::update()
 	      case 0xf0:	// progch
 		// MIDI commands (unhandled)
 		AdPlug_LogWrite("CldsPlayer(): not handling MIDI command 0x%x, "
-				"value = 0x%x\n", comhi, comlo);
+				"value = 0x%x\n", comhi);
 		break;
 	      default:
 		if(comhi < 0xa0)
@@ -320,7 +327,7 @@ bool CldsPlayer::update()
 		c->chancheat.high = high;
 	      }
 	    }
-    }
+        }
 
 	c->packpos++;
       } else
@@ -513,7 +520,6 @@ bool CldsPlayer::update()
 
 void CldsPlayer::rewind(int subsong)
 {
-  UNUSED(subsong);
   int i;
 
   // init all with 0

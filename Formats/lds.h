@@ -19,7 +19,7 @@
  * lds.h - LOUDNESS Player by Simon Peter <dn.tlp@gmx.net>
  */
 
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class CldsPlayer: public CPlayer
 {
@@ -27,19 +27,19 @@ class CldsPlayer: public CPlayer
   static CPlayer *factory(Copl *newopl) { return new CldsPlayer(newopl); }
 
   CldsPlayer(Copl *newopl);
-  ~CldsPlayer() override;
+  virtual ~CldsPlayer();
 
-  bool load(const std::string &filename, const CFileProvider &fp) override;
-  bool update() override;
-  void rewind(int subsong = -1) override;
-  float getrefresh() override { return 1193182.0f / speed; }
+  bool load(const std::string &filename, const CFileProvider &fp);
+  virtual bool update();
+  virtual void rewind(int subsong = -1);
+  float getrefresh() { return 1193182.0f / speed; }
 
-  std::string gettype() override { return std::string("LOUDNESS Sound System"); }
-  unsigned int getorders() override { return numposi; }
-  unsigned int getorder() override { return posplay; }
-  unsigned int getrow() override { return pattplay; }
-  unsigned int getspeed() override { return speed; }
-  unsigned int getinstruments() override { return numpatch; }
+  std::string gettype() { return std::string("LOUDNESS Sound System"); }
+  unsigned int getorders() { return numposi; }
+  unsigned int getorder() { return posplay; }
+  unsigned int getrow() { return pattplay; }
+  unsigned int getspeed() { return speed; }
+  unsigned int getinstruments() { return numpatch; }
 
  private:
   typedef struct {

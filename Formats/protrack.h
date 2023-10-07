@@ -22,30 +22,29 @@
 #ifndef H_PROTRACK
 #define H_PROTRACK
 
-//#include "player.h"
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class CmodPlayer: public CPlayer
 {
 public:
   CmodPlayer(Copl *newopl);
-  ~CmodPlayer() override;
+  virtual ~CmodPlayer();
 
-  bool update() override;
-  void rewind(int subsong) override;
-  float getrefresh() override;
+  bool update();
+  void rewind(int subsong);
+  float getrefresh();
 
-  unsigned int getpatterns() override
+  unsigned int getpatterns()
     { return nop; }
-  unsigned int getpattern() override
+  unsigned int getpattern()
     { return order[ord]; }
-  unsigned int getorders() override
+  unsigned int getorders()
     { return length; }
-  unsigned int getorder() override
+  unsigned int getorder()
     { return ord; }
-  unsigned int getrow() override
+  unsigned int getrow()
     { return rw; }
-  unsigned int getspeed() override
+  unsigned int getspeed()
     { return speed; }
 
  protected:

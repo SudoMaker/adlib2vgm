@@ -23,10 +23,10 @@
  */
 #include <cstring>
 #include <algorithm>
-//#include <binstr.h>
+#include <binstr.h>
 
 #include "composer.h"
-//#include "debug.h"
+#include "debug.h"
 
 //---------------------------------------------------------
 static int16_t  const skNrStepPitch          = 25; // 25 steps within a half-tone for pitch bend

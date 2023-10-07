@@ -23,7 +23,7 @@
 #include <cstring>
 #include <stdint.h>
 #include "rix.h"
-
+#include "debug.h"
 
 #define RIX_GET32(p, i) \
   ((uint32_t)p[4*i] | (uint32_t)p[4*i+1] << 8 | \
@@ -98,8 +98,14 @@ bool CrixPlayer::update()
 	return !play_end;
 }
 
+unsigned int CrixPlayer::getsubsong()
+{
+  return song;
+}
+
 void CrixPlayer::rewind(int subsong)
 {
+  song = subsong;
   I = 0; T = 0;
   mus_block = 0;
   ins_block = 0;
@@ -128,7 +134,7 @@ void CrixPlayer::rewind(int subsong)
   if (flag_mkf && subsong >= 0)
   {
     // changed to actually work and match numbering of getsubsongs()
-    uint32_t i, offset, next, table_end;
+    uint32_t i, offset, next=0, table_end;
     offset = RIX_GET32(file_buffer, 0);
     table_end = offset / 4;
     for (i = 1; i < table_end; i++)

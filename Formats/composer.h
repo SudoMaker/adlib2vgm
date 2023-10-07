@@ -27,8 +27,7 @@
 #include <vector>
 #include <string>
 
-//#include "player.h"
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 // These are here since Visual C 6 doesn't support statics declared and defined in class.
 #define INS_MAX_NAME_SIZE  9U
@@ -59,31 +58,29 @@ public:
 
     CcomposerBackend(Copl * const pNewOpl);
 
-    ~CcomposerBackend() override
+    ~CcomposerBackend()
     {
     };
 
-    bool load(const std::string &filename, const CFileProvider &fp) override
+    virtual bool load(const std::string &filename, const CFileProvider &fp)
     {
-        UNUSED(filename);
-        UNUSED(fp);
         return false;
     };
-    bool update() override
+    virtual bool update()
     {
         return false;
     };
     virtual void frontend_rewind(int subsong) = 0;
-    void rewind(int subsong) override;	// rewinds to specified subsong
-    float getrefresh() override			// returns needed timer refresh rate
+    virtual void rewind(int subsong);	// rewinds to specified subsong
+    virtual float getrefresh()			// returns needed timer refresh rate
     {
         return 1.0f;
     };
 
-    std::string gettype() override { return std::string("AdLib Visual Composer"); }
-    unsigned int getinstruments() override { return 0; };
-    std::string getinstrument(unsigned int n) override { UNUSED(n); return std::string(); };
-    std::string getdesc() override { return std::string(); };
+    virtual std::string gettype() { return std::string("AdLib Visual Composer"); }
+    virtual unsigned int getinstruments() { return 0; };
+    virtual std::string getinstrument(unsigned int n) { return std::string(); };
+    virtual std::string getdesc() { return std::string(); };
 
     typedef struct
     {

@@ -22,8 +22,7 @@
 #ifndef H_ADPLUG_RAD2PLAYER
 #define H_ADPLUG_RAD2PLAYER
 
-//#include "player.h"
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class RADPlayer;
 
@@ -33,26 +32,26 @@ public:
 	static CPlayer *factory(Copl *newopl);
 
 	Crad2Player(Copl *newopl);
-	~Crad2Player() override;
+	virtual ~Crad2Player();
 
 	/***** Operational methods *****/
-	bool load(const std::string &filename, const CFileProvider &fp = CProvider_Filesystem()) override;
-	bool update() override;
-	void rewind(int subsong = -1) override;
-	float getrefresh() override;
+	bool load(const std::string &filename, const CFileProvider &fp = CProvider_Filesystem());
+	bool update();
+	void rewind(int subsong = -1);
+	float getrefresh();
 
 	/***** Informational methods *****/
-	std::string gettype() override;
-	std::string getdesc() override         { return desc; }
+	std::string gettype();
+	std::string getdesc()         { return desc; }
 
-	unsigned int getpatterns() override;
-	unsigned int getinstruments() override;
-	unsigned int getpattern() override;
-	unsigned int getorders() override;
-	unsigned int getorder() override;
-	unsigned int getrow() override;
-	unsigned int getspeed() override;
-	std::string getinstrument(unsigned int n) override;
+	unsigned int getpatterns();
+	unsigned int getinstruments();
+	unsigned int getpattern();
+	unsigned int getorders();
+	unsigned int getorder();
+	unsigned int getrow();
+	unsigned int getspeed();
+	std::string getinstrument(unsigned int n);
 
 protected:
 	RADPlayer *rad;

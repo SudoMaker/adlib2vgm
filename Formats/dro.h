@@ -28,9 +28,8 @@
  * - Finalized support for displaying arbitrary Tag data.
  */
 
-#pragma once
 #include <stdint.h> // for uintxx_t
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class CdroPlayer: public CPlayer
 {
@@ -39,9 +38,9 @@ class CdroPlayer: public CPlayer
 		static const uint8_t iCmdDelayL = 0x01; // Wraithverge: fixed this with "static".
 
 		uint8_t *data;
-		long unsigned int iLength;
-		long unsigned int iPos;
-		int iDelay;
+		unsigned int iLength;
+		unsigned int iPos;
+		unsigned int iDelay;
 
 	private:
 		char title[40];
@@ -52,19 +51,19 @@ class CdroPlayer: public CPlayer
 		static CPlayer *factory(Copl *newopl);
 
 		CdroPlayer(Copl *newopl);
-		~CdroPlayer() override;
+		~CdroPlayer();
 
-		bool load(const std::string &filename, const CFileProvider &fp) override;
-		bool update() override;
-		void rewind(int subsong) override;
-		float getrefresh() override;
+		bool load(const std::string &filename, const CFileProvider &fp);
+		bool update();
+		void rewind(int subsong);
+		float getrefresh();
 
-		std::string gettype() override
+		std::string gettype()
 		{
 			return std::string("DOSBox Raw OPL v0.1");
 		}
 
-		std::string gettitle() override { return std::string(title, 0, 40); };
-		std::string getauthor() override { return std::string(author, 0, 40); };
-		std::string getdesc() override { return std::string(desc, 0, 1023); };
+		std::string gettitle() { return std::string(title, 0, 40); };
+		std::string getauthor() { return std::string(author, 0, 40); };
+		std::string getdesc() { return std::string(desc, 0, 1023); };
 };

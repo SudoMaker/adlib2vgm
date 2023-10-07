@@ -25,7 +25,7 @@
 #include <algorithm>
 #include <cstring>
 #include "s3m.h"
-//#include "debug.h"
+#include "debug.h"
 
 // S3M -> adlib channel conversion
 static const signed char chnresolv[32] = {
@@ -98,7 +98,6 @@ bool Cs3mPlayer::load(const std::string &filename, const CFileProvider &fp)
       memcmp(header.scrm, "SCRM", 4) ||
       header.ordnum > 256 || header.insnum > 99 || header.patnum > 99) {
     fp.close(f);
-    AdPlug_LogError("unsupported S3M file. id=%02x, type=%02x\n", header.id, header.type);
     return false;
   }
 
@@ -115,7 +114,6 @@ bool Cs3mPlayer::load(const std::string &filename, const CFileProvider &fp)
     f->seek(insptr[i] * 16);
     if (f->error()) {
  	fp.close(f);
-    AdPlug_LogError("error reading instruments\n");
 	return false;
     }
     inst[i].type = f->readInt(1);
@@ -137,14 +135,12 @@ bool Cs3mPlayer::load(const std::string &filename, const CFileProvider &fp)
       adlibins++;
       if (memcmp(inst[i].scri, "SCRI", 4)) {
 	fp.close(f);
-    AdPlug_LogError("error reading instruments (no SCRI found)\n");
 	return false;
       }
     }
   }
   if (!adlibins) { // no adlib instrument found
     fp.close(f);
-    AdPlug_LogError("error reading instruments (no instruments found)\n");
     return false;
   }
 
@@ -282,13 +278,13 @@ bool Cs3mPlayer::update()
     switch (pattnr) {
     default:	// skip invalid pattern
       AdPlug_LogWrite("Invalid pattern %d number (order %d)\n", pattnr, ord);
-      [[fallthrough]];
+      // fallthrough;
     case 0xfe:	// "++" skip marker
       if (ord + 1 < header.ordnum) {
 	ord++;
 	break;
       }
-      [[fallthrough]];
+      // else fallthrough;
     case 0xff:	// "--" end of song
       ord = 0;
       songend = 1;
@@ -474,7 +470,6 @@ bool Cs3mPlayer::update()
 
 void Cs3mPlayer::rewind(int subsong)
 {
-  UNUSED(subsong);
   // set basic variables
   songend = 0;
   ord = 0;

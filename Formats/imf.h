@@ -22,8 +22,7 @@
 #ifndef H_ADPLUG_IMFPLAYER
 #define H_ADPLUG_IMFPLAYER
 
-//#include "player.h"
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 class CimfPlayer: public CPlayer
 {

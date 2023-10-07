@@ -22,8 +22,7 @@
 
 #include <stack>
 
-//#include "player.h"
-#include "../FakeAdplug/FakeAdplug.h"
+#include "player.h"
 
 #define default_dict_size 4096     // because maximum codeword size == 12 bits
 #define max_codeword_length 12     // maximum codeword length in bits
@@ -38,17 +37,17 @@ class Cu6mPlayer: public CPlayer
     };
 
 
-  ~Cu6mPlayer() override
+  ~Cu6mPlayer()
     {
       if(song_data) delete[] song_data;
     };
 
-  bool load(const std::string &filename, const CFileProvider &fp) override;
-  bool update() override;
-  void rewind(int subsong) override;
-  float getrefresh() override;
+  bool load(const std::string &filename, const CFileProvider &fp);
+  bool update();
+  void rewind(int subsong);
+  float getrefresh();
 
-  std::string gettype() override
+  std::string gettype()
     {
       return std::string("Ultima 6 Music");
     };

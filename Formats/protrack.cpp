@@ -27,7 +27,7 @@
 
 #include <cstring>
 #include "protrack.h"
-//#include "debug.h"
+#include "debug.h"
 
 #define SPECIALARPLEN	256	// Standard length of special arpeggio lists
 #define JUMPMARKER	0x80	// Orderlist jump marker
@@ -138,7 +138,6 @@ bool CmodPlayer::update()
       tone_portamento(chan,channel[chan].portainfo);
     else
       vibrato(chan,channel[chan].vibinfo1,channel[chan].vibinfo2);
-    [[fallthrough]];
     case 10:
       if(del % 4)	// SA2 volume slide
         break;
@@ -197,8 +196,8 @@ bool CmodPlayer::update()
   if(!resolve_order()) return !songend;
   pattnr = order[ord];
 
-  if(!rw) AdPlug_LogWrite("\nCmodPlayer::update(): Pattern: %d, Order: %ld\n", pattnr, ord);
-  AdPlug_LogWrite("CmodPlayer::update():%3ld|", rw);
+  if(!rw) AdPlug_LogWrite("\nCmodPlayer::update(): Pattern: %d, Order: %d\n", pattnr, ord);
+  AdPlug_LogWrite("CmodPlayer::update():%3d|", rw);
 
   // play row
   pattern_delay = 0;
@@ -505,7 +504,6 @@ bool CmodPlayer::resolve_order()
 
 void CmodPlayer::rewind(int subsong)
 {
-  UNUSED(subsong);
   unsigned long i;
 
   // Reset playing variables

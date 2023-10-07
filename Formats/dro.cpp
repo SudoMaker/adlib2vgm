@@ -147,8 +147,8 @@ end_section:
 
 bool CdroPlayer::update()
 {
-	int iIndex;
-	int iValue;
+	unsigned int iIndex;
+	unsigned int iValue;
 	while (this->iPos < this->iLength) {
 		iIndex = this->data[this->iPos++];
 
@@ -190,7 +190,6 @@ bool CdroPlayer::update()
 
 void CdroPlayer::rewind(int subsong)
 {
-    UNUSED(subsong);
 	this->iDelay = 0;
 	this->iPos = 0;
 	opl->init();

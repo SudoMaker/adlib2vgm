@@ -22,7 +22,7 @@
 #include <algorithm>
 
 #include "rol.h"
-//#include "debug.h"
+#include "debug.h"
 
 //---------------------------------------------------------
 static int16_t  const skVersionMajor         = 4;
@@ -100,9 +100,9 @@ bool CrolPlayer::load(const std::string & filename, const CFileProvider & fp)
     // Version check
     if ((mpROLHeader->version_major != skVersionMinor) || (mpROLHeader->version_minor != skVersionMajor))
     {
-        AdPlug_LogError("Unsupported file version %d.%d or not a ROL file!\n",
+        AdPlug_LogWrite("Unsupported file version %d.%d or not a ROL file!\n",
                         mpROLHeader->version_major, mpROLHeader->version_minor);
-        AdPlug_LogError("--- CrolPlayer::load ---\n");
+        AdPlug_LogWrite("--- CrolPlayer::load ---\n");
         fp.close(f);
         return false;
     }
@@ -128,8 +128,8 @@ bool CrolPlayer::load(const std::string & filename, const CFileProvider & fp)
 
     if (load_voice_data(f, bnk_filename, fp) != true)
     {
-      AdPlug_LogError("CrolPlayer::load_voice_data(f) failed!\n");
-      AdPlug_LogError("--- CrolPlayer::load ---\n");
+      AdPlug_LogWrite("CrolPlayer::load_voice_data(f) failed!\n");
+      AdPlug_LogWrite("--- CrolPlayer::load ---\n");
 
       fp.close(f);
       return false;
@@ -174,7 +174,6 @@ bool CrolPlayer::update()
 //---------------------------------------------------------
 void CrolPlayer::frontend_rewind(int subsong)
 {
-    UNUSED(subsong);
     TVoiceData::iterator curr = mVoiceData.begin();
     TVoiceData::iterator end  = mVoiceData.end();
 
