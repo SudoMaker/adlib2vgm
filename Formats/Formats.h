@@ -37,3 +37,4 @@
 #include "amd.h"
 #include "imf.h"
 #include "adtrack.h"
+#include "bam.h"
