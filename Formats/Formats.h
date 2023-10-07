@@ -47,3 +47,5 @@
 #include "hyp.h"
 #include "psi.h"
 #include "rat.h"
+#include "fmc.h"
+#include "got.h"

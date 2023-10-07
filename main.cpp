@@ -100,6 +100,10 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CxadpsiPlayer>(&thisopl);} } },
 	{ "XAD5", { "Ratt/GRIF Player",
                []{return std::make_unique<CxadratPlayer>(&thisopl);} } },
+	{ "SNG2", { "Faust Music Tracker",
+               []{return std::make_unique<CfmcLoader>(&thisopl);} } },
+	{ "GOT", { "God Of Thunder Player",
+               []{return std::make_unique<CgotPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
