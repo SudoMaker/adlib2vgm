@@ -176,7 +176,6 @@ int main(int argc, char **argv) {
 
 	std::unique_ptr<CPlayer> player;
 	global_use_opl3 = mode == "opl3";
-	thisopl = {output_file};
 
 	if (format.empty()) {
 		auto ext = std::filesystem::path(input_file).extension().string();
@@ -214,6 +213,8 @@ int main(int argc, char **argv) {
 		puts("error: failed to open file");
 		exit(2);
 	}
+
+	thisopl = {output_file};
 
 	do {
 		if (global_verbose) puts("tick");
