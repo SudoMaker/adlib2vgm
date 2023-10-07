@@ -108,8 +108,8 @@ public:
 
 bool CcmfmacsoperaPlayer::load(const std::string& filename, const CFileProvider& fp)
 {
-	if (!fp.extension(filename, ".cmf"))
-		return false;
+//	if (!fp.extension(filename, ".cmf"))
+//		return false;
 	
 	binistream* f = fp.open(filename);
 	if (!f)
