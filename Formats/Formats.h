@@ -39,3 +39,5 @@
 #include "adtrack.h"
 #include "bam.h"
 #include "bmf.h"
+#include "cff.h"
+#include "cmfmcsop.h"
