@@ -114,6 +114,12 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<ChscPlayer>(&thisopl);} } },
 	{ "JBM", { "Johannes Bjerregaard's JBM Adlib Music Format",
                []{return std::make_unique<CjbmPlayer>(&thisopl);} } },
+	{ "KSM", { "Ken Silverman Music (requires insts.dat)",
+               []{return std::make_unique<CksmPlayer>(&thisopl);} } },
+	{ "MAD", { "Mlat Adlib Tracker",
+               []{return std::make_unique<CmadLoader>(&thisopl);} } },
+	{ "MDI", { "AdLib Visual Composer MIDIPlay File",
+               []{return std::make_unique<CmdiPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {

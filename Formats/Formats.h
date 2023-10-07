@@ -52,3 +52,6 @@
 #include "herad.h"
 #include "hsc.h"
 #include "jbm.h"
+#include "ksm.h"
+#include "mad.h"
+#include "mdi.h"
