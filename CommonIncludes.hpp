@@ -34,8 +34,6 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <cxxopts.hpp>
-
 #define stricmp			strcasecmp
 #define AdPlug_LogWrite(...)		if (global_debug) printf(__VA_ARGS__)
 #define AdPlug_LogError(...)		fprintf(stderr, __VA_ARGS__)

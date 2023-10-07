@@ -20,6 +20,7 @@
 #include "CommonIncludes.hpp"
 #include "VgmOpl.hpp"
 #include "Formats/Formats.hpp"
+#include "cxxopts.hpp"
 
 bool global_use_opl3;
 bool global_verbose;
