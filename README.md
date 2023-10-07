@@ -33,6 +33,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 
 ## Supported formats
 - A2M: AdLib Tracker 2
+- AGD: HERAD Herbulot AdLib Player
 - AMD: AMUSIC AdLib Tracker
 - AS3M: Scream Tracker 3 AdLib
 - BAM: Bob's Adlib Music Player
@@ -43,6 +44,8 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - D00: EdLib by Vibrants
 - DRO: DOSBox Raw OPL Format
 - DRO2: DOSBox Raw OPL Format
+- DTM: DeFy AdLib Tracker
+- GOT: God Of Thunder Player
 - IMF: Apogee (id/3D Realms) Music File
 - LAA: Lucas Arts Adlib Music
 - LDS: Loudness Sound System by Andras Molnar
@@ -56,9 +59,17 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - SA2: Surprise AdLib Tracker
 - SAT: Surprise AdLib Tracker
 - SCI: Sierra AdLib Music
+- SDB: HERAD Herbulot AdLib Player
 - SNG: AdLib Tracker 1.0
+- SNG2: Faust Music Tracker
+- SQX: HERAD Herbulot AdLib Player
 - U6M: Ultima 6 Music
 - WLF: Wolfenstein 3D Music File
+- XAD: Lunatic Flash/Logic Design Player
+- XAD2: Hybrid MiG-29M Player by Domark
+- XAD3: Hyp LKCC/SAC Player
+- XAD4: Psi/Future Crew PGRID Player
+- XAD5: Ratt/GRIF Player
 
 Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 
