@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
 		if (cmd.count("list-formats")) {
 			puts("Supported formats / file extensions:");
 			for (auto &it : format_list) {
-                std::cout << it.first.c_str() << " - " 
+                std::cout << it.first.c_str() << ": " 
                           << it.second.name   << "\n";
 			}
 			return 0;

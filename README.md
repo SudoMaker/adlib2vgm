@@ -32,22 +32,28 @@ Currently built targets:
 Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 
 ## Supported formats
+- A2M: AdLib Tracker 2
+- AMD: AMUSIC AdLib Tracker
+- AS3M: Scream Tracker 3 AdLib
 - CMF: Creative Music File Format by Creative Technology
-- RAD: Reality ADlib Tracker by Reality
 - D00: EdLib by Vibrants
 - DRO: DOSBox Raw OPL Format
-- RIX: Softstar RIX OPL Music Format
+- DRO2: DOSBox Raw OPL Format
+- IMF: Apogee (id/3D Realms) Music File
+- LAA: Lucas Arts Adlib Music
+- LDS: Loudness Sound System by Andras Molnar
 - MID: MIDI Audio File Format
 - MUS: AdLib MIDI Music Format by Ad Lib Inc.
-- ROL: AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk, too)
-- LDS: Loudness Sound System by Andras Molnar
-- LAA: Lucas Arts Adlib music
-- SCI: Sierra AdLib Music
-- A2M: AdLib Tracker 2
-- S3M: Scream Tracker 3 AdLib
+- RAD: Reality ADlib Tracker by Reality
 - RAW: Raw AdLib Capture
-- U6M: Ultima 6 Music
+- RIX: Softstar RIX OPL Music Format
+- ROL: AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk, too)
+- S3M: Scream Tracker 3 AdLib
 - SA2: Surprise AdLib Tracker
+- SAT: Surprise AdLib Tracker
+- SCI: Sierra AdLib Music
+- U6M: Ultima 6 Music
+- WLF: Wolfenstein 3D Music File
 
 Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 
