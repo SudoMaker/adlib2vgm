@@ -82,6 +82,8 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CadtrackLoader>(&thisopl);} } },
 	{ "BAM", { "Bob's Adlib Music Player",
                []{return std::make_unique<CbamPlayer>(&thisopl);} } },
+	{ "BMF", { "Easy AdLib 1.0 (aka FMPlay) by The Brain",
+               []{return std::make_unique<CxadbmfPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {

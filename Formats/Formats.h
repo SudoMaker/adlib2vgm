@@ -38,3 +38,4 @@
 #include "imf.h"
 #include "adtrack.h"
 #include "bam.h"
+#include "bmf.h"
