@@ -88,6 +88,18 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CcffLoader>(&thisopl);} } },
 	{ "CMF2", { "SoundFX Macs Opera CMF Player",
                []{return std::make_unique<CcmfmacsoperaPlayer>(&thisopl);} } },
+	{ "DTM", { "DeFy AdLib Tracker",
+               []{return std::make_unique<CdtmLoader>(&thisopl);} } },
+	{ "XAD", { "Lunatic Flash/Logic Design Player",
+               []{return std::make_unique<CxadflashPlayer>(&thisopl);} } },
+	{ "XAD2", { "Hybrid MiG-29M Player by Domark",
+               []{return std::make_unique<CxadhybridPlayer>(&thisopl);} } },
+	{ "XAD3", { "Hyp LKCC/SAC Player",
+               []{return std::make_unique<CxadhypPlayer>(&thisopl);} } },
+	{ "XAD4", { "Psi/Future Crew PGRID Player",
+               []{return std::make_unique<CxadpsiPlayer>(&thisopl);} } },
+	{ "XAD5", { "Ratt/GRIF Player",
+               []{return std::make_unique<CxadratPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
