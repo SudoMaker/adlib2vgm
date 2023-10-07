@@ -34,7 +34,7 @@ struct format {
 };
 
 std::vector<std::string> force_opl3 = {
-	"PIS", "SNG3"
+	"PIS", "SNG3", "SOP"
 };
 
 std::map<std::string, struct format> format_list = {
@@ -128,6 +128,8 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CpisPlayer>(&thisopl);} } },
 	{ "SNG3", { "SNGPlay File Format",
                []{return std::make_unique<CsngPlayer>(&thisopl);} } },
+	{ "SOP", { "Note Sequencer v1.0 by sopepos",
+               []{return std::make_unique<CsopPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
