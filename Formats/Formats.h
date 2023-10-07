@@ -50,3 +50,5 @@
 #include "fmc.h"
 #include "got.h"
 #include "herad.h"
+#include "hsc.h"
+#include "jbm.h"

@@ -110,6 +110,10 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CheradPlayer>(&thisopl);} } },
 	{ "SQX", { "HERAD Herbulot AdLib Player",
                []{return std::make_unique<CheradPlayer>(&thisopl);} } },
+	{ "HSC", { "HSC Adlib Composer / HSC-Tracker",
+               []{return std::make_unique<ChscPlayer>(&thisopl);} } },
+	{ "JBM", { "Johannes Bjerregaard's JBM Adlib Music Format",
+               []{return std::make_unique<CjbmPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
