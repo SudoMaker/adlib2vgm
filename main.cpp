@@ -33,6 +33,10 @@ struct format {
     std::function<std::unique_ptr<CPlayer>()> player;
 };
 
+std::vector<std::string> force_opl3 = {
+	"PIS"
+};
+
 std::map<std::string, struct format> format_list = {
 	{ "CMF", { "Creative Music File Format by Creative Technology",
                []{return std::make_unique<CcmfPlayer>(&thisopl);} } },
@@ -120,6 +124,8 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CmadLoader>(&thisopl);} } },
 	{ "MDI", { "AdLib Visual Composer MIDIPlay File",
                []{return std::make_unique<CmdiPlayer>(&thisopl);} } },
+	{ "PIS", { "Beni Tracker PIS module",
+               []{return std::make_unique<CpisPlayer>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
@@ -175,7 +181,6 @@ int main(int argc, char **argv) {
 	}
 
 	std::unique_ptr<CPlayer> player;
-	global_use_opl3 = mode == "opl3";
 
 	if (format.empty()) {
 		auto ext = std::filesystem::path(input_file).extension().string();
@@ -193,6 +198,15 @@ int main(int argc, char **argv) {
 			}
 		}
 
+		auto force = std::find(force_opl3.begin(), force_opl3.end(), format);
+		if (force != force_opl3.end()) {
+			printf("forcing OPL3 for format %s\n", format.c_str());
+			mode = "opl3";
+		}
+
+		global_use_opl3 = mode == "opl3";
+		printf("mode: %s\n", mode.c_str());
+
 		auto it = format_list.find(format);
 
 		if (it != format_list.end()) {
@@ -207,7 +221,7 @@ int main(int argc, char **argv) {
 		return 2;
 	}
 
-    std::cout << "trying " << format << ": " << format_name << "\n";
+    printf("using %s: %s\n", format.c_str(), format_name.c_str());
 
 	if (!player->load(input_file, CProvider_Filesystem())) {
 		puts("error: failed to open file");
