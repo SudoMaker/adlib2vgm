@@ -56,6 +56,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - MDI: AdLib Visual Composer MIDIPlay File
 - MID: MIDI Audio File Format
 - MUS: AdLib MIDI Music Format by Ad Lib Inc.
+- PIS: Beni Tracker PIS module
 - RAD: Reality ADlib Tracker by Reality
 - RAW: Raw AdLib Capture
 - RIX: Softstar RIX OPL Music Format
@@ -67,6 +68,8 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - SDB: HERAD Herbulot AdLib Player
 - SNG: AdLib Tracker 1.0
 - SNG2: Faust Music Tracker
+- SNG3: SNGPlay File Format
+- SOP: Note Sequencer v1.0 by sopepos
 - SQX: HERAD Herbulot AdLib Player
 - U6M: Ultima 6 Music
 - WLF: Wolfenstein 3D Music File
