@@ -93,6 +93,8 @@ void VgmOpl::save() {
 		*((uint16_t *)&buf[1]) = buffered_sleep_samples;
 		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
 		buffered_sleep_samples = 0;
+		buf[0] = 0x66;              // end of sound data
+		buffer.insert(buffer.end(), buf, buf+1);
 	}
 
 	// EoF offset
