@@ -72,6 +72,8 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<Csa2Loader>(&thisopl);} } },
 	{ "SAT", { "Surprise AdLib Tracker",
                []{return std::make_unique<Csa2Loader>(&thisopl);} } },
+	{ "AMD", { "AMUSIC AdLib Tracker",
+               []{return std::make_unique<CamdLoader>(&thisopl);} } },
 };
 
 int main(int argc, char **argv) {
