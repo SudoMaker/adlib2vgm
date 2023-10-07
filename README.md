@@ -35,7 +35,11 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - A2M: AdLib Tracker 2
 - AMD: AMUSIC AdLib Tracker
 - AS3M: Scream Tracker 3 AdLib
+- BAM: Bob's Adlib Music Player
+- BMF: Easy AdLib 1.0 (aka FMPlay) by The Brain
+- CFF: Boom Tracker
 - CMF: Creative Music File Format by Creative Technology
+- CMF2: SoundFX Macs Opera CMF Player
 - D00: EdLib by Vibrants
 - DRO: DOSBox Raw OPL Format
 - DRO2: DOSBox Raw OPL Format
@@ -52,6 +56,7 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - SA2: Surprise AdLib Tracker
 - SAT: Surprise AdLib Tracker
 - SCI: Sierra AdLib Music
+- SNG: AdLib Tracker 1.0
 - U6M: Ultima 6 Music
 - WLF: Wolfenstein 3D Music File
 
