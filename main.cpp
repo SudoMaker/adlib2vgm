@@ -50,6 +50,8 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<Cdro2Player>(&thisopl);} } },
 	{ "RIX", { "Softstar RIX OPL Music Format",
                []{return std::make_unique<CrixPlayer>(&thisopl);} } },
+	{ "MKF", { "Softstar RIX OPL Music Format in MKF container",
+               []{return std::make_unique<CrixPlayer>(&thisopl);} } },
 	{ "LAA", { "Lucas Arts Adlib Music",
                []{return std::make_unique<CmidPlayer>(&thisopl);} } },
 	{ "SCI", { "Sierra AdLib Music",

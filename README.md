@@ -55,12 +55,13 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - MAD: Mlat Adlib Tracker
 - MDI: AdLib Visual Composer MIDIPlay File
 - MID: MIDI Audio File Format
+- MKF: Softstar RIX OPL Music Format in MKF container
 - MUS: AdLib MIDI Music Format by Ad Lib Inc.
 - PIS: Beni Tracker PIS module
 - RAD: Reality ADlib Tracker by Reality
 - RAW: Raw AdLib Capture
 - RIX: Softstar RIX OPL Music Format
-- ROL: AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk, too)
+- ROL: AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk)
 - S3M: Scream Tracker 3 AdLib
 - SA2: Surprise AdLib Tracker
 - SAT: Surprise AdLib Tracker
@@ -78,8 +79,6 @@ Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 - XAD3: Hyp LKCC/SAC Player
 - XAD4: Psi/Future Crew PGRID Player
 - XAD5: Ratt/GRIF Player
-
-Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
 
 ## Usage examples
 ```shell script
