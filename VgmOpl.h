@@ -42,6 +42,7 @@ public:
 	void set_author(std::string author);
 	void set_title(std::string title);
 	void set_desc(std::string desc);
+	void set_loop(bool enable);
 
 protected:
 	void write16le(uint8_t *buffer, uint32_t value);
@@ -56,6 +57,7 @@ protected:
 	std::vector<uint8_t> buffer;
 	uint16_t buffered_sleep_samples = 0;
 	std::string author, title, desc;
+	bool loop;
 };
 
 // vi: ts=8 sw=8 noet

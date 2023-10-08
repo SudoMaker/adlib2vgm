@@ -28,6 +28,8 @@
 #define vgm_eof_offset    0x04
 #define vgm_gdm_offset    0x14
 #define vgm_total_samples 0x18
+#define vgm_loop_offset   0x1c
+#define vgm_loop_samples  0x20
 #define vgm_opl2_clock    0x50
 #define vgm_opl3_clock    0x5c
 #define vgm_version       0x08
@@ -165,6 +167,11 @@ void VgmOpl::save() {
 	write32le(&buffer[vgm_gdm_offset], gd3_start - vgm_gdm_offset);
 	write32le(&buffer[vgm_eof_offset], buffer.size() - vgm_eof_offset);
 
+	if (loop) {
+		write32le(&buffer[vgm_loop_offset], vgm_header_size - vgm_loop_offset);
+		write32le(&buffer[vgm_loop_samples], sample_count);
+	}
+
 	file->write(reinterpret_cast<const char *>(&buffer[0]), buffer.size());
 }
 
@@ -178,6 +185,10 @@ void VgmOpl::set_title(std::string s) {
 
 void VgmOpl::set_desc(std::string s) {
 	desc = s;
+}
+
+void VgmOpl::set_loop(bool enable) {
+	loop = enable;
 }
 
 // vi: ts=8 sw=8 noet

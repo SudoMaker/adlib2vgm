@@ -147,10 +147,12 @@ int main(int argc, char **argv) {
 		("i,in", "Input file", cxxopts::value<std::string>())
 		("o,out", "Output file", cxxopts::value<std::string>())
 		("s,subsong", "Select subsong", cxxopts::value<unsigned int>()->default_value("1"))
+		("L,loop", "Enable looping")
 		;
 
 	std::string mode, input_file, output_file, format, format_name;
 	unsigned int subsong;
+	bool loop = false;
 
 	try {
 		auto cmd = options.parse(argc, argv);
@@ -162,6 +164,7 @@ int main(int argc, char **argv) {
 
 		if (cmd.count("verbose")) global_verbose = true;
 		if (cmd.count("debug"))   global_debug   = true;
+		if (cmd.count("loop"))    loop           = true;
 
 		if (cmd.count("list-formats")) {
 			puts("Supported formats / file extensions:");
@@ -258,6 +261,7 @@ int main(int argc, char **argv) {
 	thisopl.set_author(player->getauthor());
 	thisopl.set_title(player->gettitle());
 	thisopl.set_desc(player->getdesc());
+	thisopl.set_loop(loop);
 
 	thisopl.save();
 
