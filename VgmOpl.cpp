@@ -34,7 +34,10 @@
 #define vgm_cmd_write_ymf262_port0 0x5e
 #define vgm_cmd_write_ymf262_port1 0x5f
 #define vgm_cmd_wait_n_samples     0x61
+#define vgm_cmd_wait_735_samples   0x62
+#define vgm_cmd_wait_882_samples   0x63
 #define vgm_cmd_end_of_sound_data  0x66
+#define vgm_cmd_wait_n1_samples    0x70	/* 0x70-0x7f: 0x7n --> n+1 samples */
 
 const unsigned char VgmOpl::op_table[9] = {
 	0x00, 0x01, 0x02, 0x08, 0x09, 0x0a, 0x10, 0x11, 0x12
@@ -72,9 +75,19 @@ VgmOpl::VgmOpl(const std::string &filename) {
 }
 
 void VgmOpl::store_sleep(uint16_t n_samples) {
-	uint8_t buf[3] = { vgm_cmd_wait_n_samples };
-	write16le(&buf[1], n_samples);
-	buffer.insert(buffer.end(), buf, buf+sizeof(buf));
+	if (!n_samples) {
+		return;
+	} else if (n_samples <= 16) {
+		buffer.push_back(vgm_cmd_wait_n1_samples + n_samples - 1);
+	} else if (n_samples == 735) {
+		buffer.push_back(vgm_cmd_wait_735_samples);
+	} else if (n_samples == 882) {
+		buffer.push_back(vgm_cmd_wait_882_samples);
+	} else {
+		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
+		write16le(&buf[1], n_samples);
+		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
+	}
 }
 
 void VgmOpl::write(int reg, int val) {
