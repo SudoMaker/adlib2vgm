@@ -1,5 +1,10 @@
 #! /bin/bash
 
+if [ ! -e ../build/adlib2vgm ] ; then
+    echo "unable to fine ../build/adlib2vgm" >&2
+    exit 1
+fi
+
 mkdir -p test
 
 for i in ../examples/* ; do
@@ -15,4 +20,4 @@ for i in ../examples/* ; do
 done
 
 md5sum test/* > test.md5sum
-diff test.md5sum reference.md5sum
+diff -s test.md5sum reference.md5sum
