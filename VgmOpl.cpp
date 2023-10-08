@@ -19,7 +19,9 @@
 
 #include "VgmOpl.h"
 
-const unsigned char VgmOpl::op_table[9] = {0x00, 0x01, 0x02, 0x08, 0x09, 0x0a, 0x10, 0x11, 0x12};
+const unsigned char VgmOpl::op_table[9] = {
+	0x00, 0x01, 0x02, 0x08, 0x09, 0x0a, 0x10, 0x11, 0x12
+};
 
 VgmOpl::VgmOpl(const std::string &filename) {
 	file = new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary);
@@ -105,3 +107,5 @@ void VgmOpl::save() {
 
 	file->write(reinterpret_cast<const char *>(&buffer[0]), buffer.size());
 }
+
+// vi: ts=8 sw=8 noet

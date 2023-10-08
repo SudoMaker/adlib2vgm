@@ -29,8 +29,8 @@ bool global_debug;
 VgmOpl thisopl;
 
 struct format {
-    std::string name;
-    std::function<std::unique_ptr<CPlayer>()> player;
+	std::string name;
+	std::function<std::unique_ptr<CPlayer>()> player;
 };
 
 std::vector<std::string> force_opl3 = {
@@ -60,7 +60,7 @@ std::map<std::string, struct format> format_list = {
                []{return std::make_unique<CmusPlayer>(&thisopl);} } },
 	{ "LDS", { "Loudness Sound System by Andras Molnar",
                []{return std::make_unique<CldsPlayer>(&thisopl);} } },
-	{ "ROL", { "AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk, too)",
+	{ "ROL", { "AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk)",
                []{return std::make_unique<CrolPlayer>(&thisopl);} } },
 	{ "A2M", { "AdLib Tracker 2",
                []{return std::make_unique<Ca2mLoader>(&thisopl);} } },
@@ -225,7 +225,7 @@ int main(int argc, char **argv) {
 		return 2;
 	}
 
-    printf("using loader %s: %s\n", format.c_str(), format_name.c_str());
+	printf("using loader %s: %s\n", format.c_str(), format_name.c_str());
 
 	if (!player->load(input_file, CProvider_Filesystem())) {
 		puts("error: failed to open file");
@@ -247,3 +247,5 @@ int main(int argc, char **argv) {
 
 	return 0;
 }
+
+// vi: ts=8 sw=8 noet
