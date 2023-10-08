@@ -40,6 +40,9 @@ public:
 	void save();
 
 protected:
+	void write16le(uint8_t *buffer, uint32_t value);
+	void write32le(uint8_t *buffer, uint32_t value);
+
 	static const unsigned char	op_table[9];
 
 	std::ofstream *file;
@@ -47,3 +50,5 @@ protected:
 	std::vector<uint8_t> buffer;
 	uint16_t buffered_sleep_samples = 0;
 };
+
+// vi: ts=8 sw=8 noet

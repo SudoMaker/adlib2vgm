@@ -19,26 +19,52 @@
 
 #include "VgmOpl.h"
 
+#define OPL2_CLOCK 3579545
+#define OPL3_CLOCK 14318180
+
+#define vgm_header_size   0x80
+#define vgm_eof_offset    0x04
+#define vgm_total_samples 0x18
+#define vgm_opl2_clock    0x50
+#define vgm_opl3_clock    0x5c
+#define vgm_version       0x08
+#define vgm_data_offset   0x34
+
+#define vgm_cmd_write_ym3812       0x5a
+#define vgm_cmd_write_ymf262_port0 0x5e
+#define vgm_cmd_write_ymf262_port1 0x5f
+#define vgm_cmd_wait_n_samples     0x61
+#define vgm_cmd_end_of_sound_data  0x66
+
 const unsigned char VgmOpl::op_table[9] = {
 	0x00, 0x01, 0x02, 0x08, 0x09, 0x0a, 0x10, 0x11, 0x12
 };
 
+void VgmOpl::write16le(uint8_t *buffer, uint32_t value) {
+	buffer[0] = (value      ) & 0xff;
+	buffer[1] = (value >>  8) & 0xff;
+}
+
+void VgmOpl::write32le(uint8_t *buffer, uint32_t value) {
+	buffer[0] = (value      ) & 0xff;
+	buffer[1] = (value >>  8) & 0xff;
+	buffer[2] = (value >> 16) & 0xff;
+	buffer[3] = (value >> 24) & 0xff;
+}
+
 VgmOpl::VgmOpl(const std::string &filename) {
 	file = new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary);
 
-	uint8_t buf[128] = "Vgm ";
+	uint8_t buf[vgm_header_size] = "Vgm ";
 
-	auto *buf32 = (uint32_t *)buf;
-
-	buf32[0x08 / 4] = 0x00000151;
-
-	buf32[0x34 / 4] = 0x0000004c;
+	write32le(&buf[vgm_version],     0x151);
+	write32le(&buf[vgm_data_offset], vgm_header_size - vgm_data_offset);
 
 	if (!global_use_opl3) {
-		buf32[0x50 / 4] = 3579545;
+		write32le(&buf[vgm_opl2_clock], OPL2_CLOCK);
 		settype(TYPE_OPL2);
 	} else {
-		buf32[0x5c / 4] = 14318180;
+		write32le(&buf[vgm_opl3_clock], OPL3_CLOCK);
 		settype(TYPE_OPL3);
 	}
 
@@ -47,22 +73,22 @@ VgmOpl::VgmOpl(const std::string &filename) {
 
 void VgmOpl::write(int reg, int val) {
 	if (buffered_sleep_samples) {
-		uint8_t buf[3] = {0x61};
-		*((uint16_t *)&buf[1]) = buffered_sleep_samples;
+		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
+		write16le(&buf[1], buffered_sleep_samples);
 		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
 		buffered_sleep_samples = 0;
 	}
 
-	uint8_t buf[3] = {0x5a, (uint8_t)reg, (uint8_t)val};
+	uint8_t buf[3] = { vgm_cmd_write_ym3812, (uint8_t)reg, (uint8_t)val };
 
 	if (currType == TYPE_OPL3) {
 		if (currChip == 0) {
-			buf[0] = 0x5e;
+			buf[0] = vgm_cmd_write_ymf262_port0;
 			if (global_verbose)
 				printf("OPL3 C0 write: 0x%02x 0x%02x\n", reg, val);
 
 		} else {
-			buf[0] = 0x5f;
+			buf[0] = vgm_cmd_write_ymf262_port1;
 			if (global_verbose)
 				printf("OPL3 C1 write: 0x%02x 0x%02x\n", reg, val);
 
@@ -81,8 +107,8 @@ void VgmOpl::insert_sleep(uint16_t samples) {
 	if (buffered_sleep_samples + samples <= UINT16_MAX) {
 		buffered_sleep_samples += samples;
 	} else {
-		uint8_t buf[3] = {0x61};
-		*((uint16_t *)&buf[1]) = buffered_sleep_samples;
+		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
+		write16le(&buf[1], buffered_sleep_samples);
 		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
 
 		buffered_sleep_samples = samples;
@@ -91,19 +117,16 @@ void VgmOpl::insert_sleep(uint16_t samples) {
 
 void VgmOpl::save() {
 	if (buffered_sleep_samples) {
-		uint8_t buf[3] = {0x61};
-		*((uint16_t *)&buf[1]) = buffered_sleep_samples;
+		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
+		write16le(&buf[1], buffered_sleep_samples);
 		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
 		buffered_sleep_samples = 0;
-		buf[0] = 0x66;              // end of sound data
+		buf[0] = vgm_cmd_end_of_sound_data;
 		buffer.insert(buffer.end(), buf, buf+1);
 	}
 
-	// EoF offset
-	*((uint32_t *)&buffer[0x4]) = buffer.size() - 4;
-
-	// Total # samples
-	*((uint32_t *)&buffer[0x18]) = sample_count;
+	write32le(&buffer[vgm_eof_offset], buffer.size() - vgm_eof_offset);
+	write32le(&buffer[vgm_total_samples], sample_count);
 
 	file->write(reinterpret_cast<const char *>(&buffer[0]), buffer.size());
 }
