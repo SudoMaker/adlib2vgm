@@ -146,9 +146,11 @@ int main(int argc, char **argv) {
 		("f,format", "Override auto format detection", cxxopts::value<std::string>()->default_value(""))
 		("i,in", "Input file", cxxopts::value<std::string>())
 		("o,out", "Output file", cxxopts::value<std::string>())
+		("s,subsong", "Select subsong", cxxopts::value<unsigned int>()->default_value("1"))
 		;
 
 	std::string mode, input_file, output_file, format, format_name;
+	unsigned int subsong;
 
 	try {
 		auto cmd = options.parse(argc, argv);
@@ -180,6 +182,8 @@ int main(int argc, char **argv) {
 		format = cmd["format"].as<std::string>();
 		input_file = cmd["in"].as<std::string>();
 		output_file = cmd["out"].as<std::string>();
+		subsong = cmd["subsong"].as<unsigned int>();
+
 	} catch (std::exception &e) {
 		std::cout << "Error: " << e.what() << "\n";
 		std::cout << options.help();
@@ -231,6 +235,15 @@ int main(int argc, char **argv) {
 		puts("error: failed to open file");
 		exit(2);
 	}
+
+	unsigned int subsongs = player->getsubsongs();
+
+	if (subsong == 0 || subsong > subsongs) {
+		printf("error: subsong out of range [1-%d]\n", subsongs);
+		return EXIT_FAILURE;
+	}
+
+	player->rewind(subsong - 1);
 
 	double sleep_samples = 0.0;
 
