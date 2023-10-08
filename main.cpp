@@ -230,11 +230,14 @@ int main(int argc, char **argv) {
 
 	thisopl = {output_file};
 
+	double sleep_samples = 0.0;
+
 	do {
 		if (global_verbose) puts("tick");
 		double hertz = player->getrefresh();
-		double sleep_samples = 44100 / hertz;
+		sleep_samples += 44100 / hertz;
 		thisopl.insert_sleep(round(sleep_samples));
+		sleep_samples -= round(sleep_samples);
 	} while (player->update());
 
 	thisopl.save();
