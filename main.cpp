@@ -198,11 +198,7 @@ int main(int argc, char **argv) {
 		return 2;
 	}
 
-	for (auto &it : format) {
-		if (isalpha(it)) {
-			it = toupper(it);
-		}
-	}
+	std::transform(format.begin(), format.end(), format.begin(), ::toupper);
 
 	auto force = std::find(force_opl3.begin(), force_opl3.end(), format);
 	if (force != force_opl3.end()) {
