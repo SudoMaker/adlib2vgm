@@ -19,12 +19,14 @@
 */
 
 #include "VgmOpl.h"
+#include "utfcpp/utf8.h"
 
 #define OPL2_CLOCK 3579545
 #define OPL3_CLOCK 14318180
 
 #define vgm_header_size   0x80
 #define vgm_eof_offset    0x04
+#define vgm_gdm_offset    0x14
 #define vgm_total_samples 0x18
 #define vgm_opl2_clock    0x50
 #define vgm_opl3_clock    0x5c
@@ -119,14 +121,63 @@ void VgmOpl::insert_sleep(uint16_t samples) {
 	buffered_sleep_samples += samples;
 }
 
+void VgmOpl::append_as_u16string(std::string line) {
+	uint8_t buf[sizeof(char16_t)];
+
+	std::u16string utf16line = utf8::utf8to16(line);
+
+	for (char16_t c : utf16line) {
+		write16le(&buf[0], c);
+		buffer.insert(buffer.end(), buf, buf + sizeof(buf));
+	}
+	buffer.push_back(0);
+	buffer.push_back(0);
+}
+
 void VgmOpl::save() {
 	if (buffered_sleep_samples) store_sleep(buffered_sleep_samples);
 	buffer.push_back(vgm_cmd_end_of_sound_data);
 
-	write32le(&buffer[vgm_eof_offset], buffer.size() - vgm_eof_offset);
 	write32le(&buffer[vgm_total_samples], sample_count);
 
+	unsigned int gd3_start = buffer.size();
+
+	uint8_t buf[12] = "Gd3 ";
+
+	write32le(&buf[4], 0x0100);		// verion 1.0
+	buffer.insert(buffer.end(), buf, buf+sizeof(buf));
+
+	append_as_u16string(title);		// Title ENG
+	append_as_u16string("");		// Title JAP
+	append_as_u16string("");		// Game name ENG
+	append_as_u16string("");		// Game name JAP
+	append_as_u16string("");		// System name ENG
+	append_as_u16string("");		// System name JAP
+	append_as_u16string(author);		// Author ENG
+	append_as_u16string("");		// Author JAP
+	append_as_u16string("");		// Date
+	append_as_u16string("adlib2vgm");	// Converter
+	append_as_u16string(desc);		// Notes
+
+	unsigned int gd3_length = buffer.size() - gd3_start - 12;
+	write32le(&buffer[gd3_start+8], gd3_length);
+
+	write32le(&buffer[vgm_gdm_offset], gd3_start - vgm_gdm_offset);
+	write32le(&buffer[vgm_eof_offset], buffer.size() - vgm_eof_offset);
+
 	file->write(reinterpret_cast<const char *>(&buffer[0]), buffer.size());
+}
+
+void VgmOpl::set_author(std::string s) {
+	author = s;
+}
+
+void VgmOpl::set_title(std::string s) {
+	title = s;
+}
+
+void VgmOpl::set_desc(std::string s) {
+	desc = s;
 }
 
 // vi: ts=8 sw=8 noet

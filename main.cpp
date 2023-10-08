@@ -240,6 +240,10 @@ int main(int argc, char **argv) {
 		sleep_samples -= round(sleep_samples);
 	} while (player->update());
 
+	thisopl.set_author(player->getauthor());
+	thisopl.set_title(player->gettitle());
+	thisopl.set_desc(player->getdesc());
+
 	thisopl.save();
 
 	puts("Done.");

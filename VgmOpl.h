@@ -39,10 +39,15 @@ public:
 	void insert_sleep(uint16_t samples);
 	void save();
 
+	void set_author(std::string author);
+	void set_title(std::string title);
+	void set_desc(std::string desc);
+
 protected:
 	void write16le(uint8_t *buffer, uint32_t value);
 	void write32le(uint8_t *buffer, uint32_t value);
 	void store_sleep(uint16_t &n_samples);
+	void append_as_u16string(std::string line);
 
 	static const unsigned char	op_table[9];
 
@@ -50,6 +55,7 @@ protected:
 	uint32_t sample_count = 0;
 	std::vector<uint8_t> buffer;
 	uint16_t buffered_sleep_samples = 0;
+	std::string author, title, desc;
 };
 
 // vi: ts=8 sw=8 noet
