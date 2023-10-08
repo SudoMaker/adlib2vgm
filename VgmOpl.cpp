@@ -57,7 +57,7 @@ VgmOpl::VgmOpl(const std::string &filename) {
 
 	uint8_t buf[vgm_header_size] = "Vgm ";
 
-	write32le(&buf[vgm_version],     0x151);
+	write32le(&buf[vgm_version], 0x151);
 	write32le(&buf[vgm_data_offset], vgm_header_size - vgm_data_offset);
 
 	if (!global_use_opl3) {
