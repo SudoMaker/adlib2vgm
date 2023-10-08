@@ -2,6 +2,7 @@
     This file is part of adlib2vgm.
 
     Copyright (C) 2021 ReimuNotMoe <reimu@sudomaker.com>
+    Copyright (C) 2023 Ivo van poorten <ivopvp@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -150,7 +151,7 @@ int main(int argc, char **argv) {
 		("L,loop", "Enable looping")
 		;
 
-	std::string mode, input_file, output_file, format, format_name;
+	std::string mode, input_file, output_file, format;
 	unsigned int subsong;
 	bool loop = false;
 
@@ -210,11 +211,6 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	if (format.empty()) {
-		puts("error: please supply a file with proper extension, or use the -f option.");
-		return 2;
-	}
-
 	std::transform(format.begin(), format.end(), format.begin(), ::toupper);
 
 	auto force = std::find(force_opl3.begin(), force_opl3.end(), format);
@@ -233,18 +229,28 @@ int main(int argc, char **argv) {
 	auto it = format_list.find(format);
 
 	if (it != format_list.end()) {
+		printf("using loader %s: %s\n", format.c_str(), it->second.name.c_str());
 		player = it->second.player();
-		format_name = it->second.name;
+		if (!player->load(input_file, CProvider_Filesystem())) {
+			puts("error: failed to load file");
+			return EXIT_FAILURE;
+		}
 	} else {
-		printf("error: file format `%s' is unsupported!\n", format.c_str());
-		return 2;
-	}
-
-	printf("using loader %s: %s\n", format.c_str(), format_name.c_str());
-
-	if (!player->load(input_file, CProvider_Filesystem())) {
-		puts("error: failed to open file");
-		exit(2);
+		bool success = false;
+		printf("file format '%s' not found\n", format.c_str());
+		for (auto detect : format_list) {
+			printf("trying %s: %s\n", detect.first.c_str(), detect.second.name.c_str());
+			player = detect.second.player();
+			if (player->load(input_file, CProvider_Filesystem())) {
+				puts("success!");
+				success = true;
+				break;
+			}
+		}
+		if (!success) {
+			puts("error: unable to load file");
+			return EXIT_FAILURE;
+		}
 	}
 
 	unsigned int subsongs = player->getsubsongs();
