@@ -71,11 +71,15 @@ VgmOpl::VgmOpl(const std::string &filename) {
 	buffer.insert(buffer.end(), buf, buf+sizeof(buf));
 }
 
+void VgmOpl::store_sleep(uint16_t n_samples) {
+	uint8_t buf[3] = { vgm_cmd_wait_n_samples };
+	write16le(&buf[1], n_samples);
+	buffer.insert(buffer.end(), buf, buf+sizeof(buf));
+}
+
 void VgmOpl::write(int reg, int val) {
 	if (buffered_sleep_samples) {
-		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
-		write16le(&buf[1], buffered_sleep_samples);
-		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
+		store_sleep(buffered_sleep_samples);
 		buffered_sleep_samples = 0;
 	}
 
@@ -101,22 +105,16 @@ void VgmOpl::insert_sleep(uint16_t samples) {
 	if (buffered_sleep_samples + samples <= UINT16_MAX) {
 		buffered_sleep_samples += samples;
 	} else {
-		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
-		write16le(&buf[1], buffered_sleep_samples);
-		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
-
+		store_sleep(buffered_sleep_samples);
 		buffered_sleep_samples = samples;
 	}
 }
 
 void VgmOpl::save() {
 	if (buffered_sleep_samples) {
-		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
-		write16le(&buf[1], buffered_sleep_samples);
-		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
+		store_sleep(buffered_sleep_samples);
 		buffered_sleep_samples = 0;
-		buf[0] = vgm_cmd_end_of_sound_data;
-		buffer.insert(buffer.end(), buf, buf+1);
+		buffer.push_back(vgm_cmd_end_of_sound_data);
 	}
 
 	write32le(&buffer[vgm_eof_offset], buffer.size() - vgm_eof_offset);

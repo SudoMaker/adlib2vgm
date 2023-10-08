@@ -42,6 +42,7 @@ public:
 protected:
 	void write16le(uint8_t *buffer, uint32_t value);
 	void write32le(uint8_t *buffer, uint32_t value);
+	void store_sleep(uint16_t n_samples);
 
 	static const unsigned char	op_table[9];
 
