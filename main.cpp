@@ -209,6 +209,8 @@ int main(int argc, char **argv) {
 	global_use_opl3 = mode == "opl3";
 	printf("mode: %s\n", mode.c_str());
 
+	thisopl = {output_file};
+
 	std::unique_ptr<CPlayer> player;
 
 	auto it = format_list.find(format);
@@ -227,8 +229,6 @@ int main(int argc, char **argv) {
 		puts("error: failed to open file");
 		exit(2);
 	}
-
-	thisopl = {output_file};
 
 	double sleep_samples = 0.0;
 
