@@ -184,8 +184,6 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
-	std::unique_ptr<CPlayer> player;
-
 	if (format.empty()) {
 		auto ext = std::filesystem::path(input_file).extension().string();
 
@@ -195,33 +193,35 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	if (!format.empty()) {
-		for (auto &it : format) {
-			if (isalpha(it)) {
-				it = toupper(it);
-			}
-		}
-
-		auto force = std::find(force_opl3.begin(), force_opl3.end(), format);
-		if (force != force_opl3.end()) {
-			printf("forcing OPL3 for format %s\n", format.c_str());
-			mode = "opl3";
-		}
-
-		global_use_opl3 = mode == "opl3";
-		printf("mode: %s\n", mode.c_str());
-
-		auto it = format_list.find(format);
-
-		if (it != format_list.end()) {
-			player = it->second.player();
-            format_name = it->second.name;
-		} else {
-			printf("error: file format `%s' is unsupported!\n", format.c_str());
-			return 2;
-		}
-	} else {
+	if (format.empty()) {
 		puts("error: please supply a file with proper extension, or use the -f option.");
+		return 2;
+	}
+
+	for (auto &it : format) {
+		if (isalpha(it)) {
+			it = toupper(it);
+		}
+	}
+
+	auto force = std::find(force_opl3.begin(), force_opl3.end(), format);
+	if (force != force_opl3.end()) {
+		printf("forcing OPL3 for format %s\n", format.c_str());
+		mode = "opl3";
+	}
+
+	global_use_opl3 = mode == "opl3";
+	printf("mode: %s\n", mode.c_str());
+
+	std::unique_ptr<CPlayer> player;
+
+	auto it = format_list.find(format);
+
+	if (it != format_list.end()) {
+		player = it->second.player();
+		format_name = it->second.name;
+	} else {
+		printf("error: file format `%s' is unsupported!\n", format.c_str());
 		return 2;
 	}
 
