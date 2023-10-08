@@ -82,17 +82,11 @@ void VgmOpl::write(int reg, int val) {
 	uint8_t buf[3] = { vgm_cmd_write_ym3812, (uint8_t)reg, (uint8_t)val };
 
 	if (currType == TYPE_OPL3) {
-		if (currChip == 0) {
-			buf[0] = vgm_cmd_write_ymf262_port0;
-			if (global_verbose)
-				printf("OPL3 C0 write: 0x%02x 0x%02x\n", reg, val);
-
-		} else {
-			buf[0] = vgm_cmd_write_ymf262_port1;
-			if (global_verbose)
-				printf("OPL3 C1 write: 0x%02x 0x%02x\n", reg, val);
-
-		}
+		buf[0] = currChip ? vgm_cmd_write_ymf262_port1
+				  : vgm_cmd_write_ymf262_port0;
+		if (global_verbose)
+			printf("OPL3 C%d write: 0x%02x 0x%02x\n",
+					currChip, reg, val);
 	} else {
 		if (global_verbose)
 			printf("OPL2 write: 0x%02x 0x%02x\n", reg, val);
