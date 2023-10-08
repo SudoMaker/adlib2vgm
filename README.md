@@ -109,7 +109,6 @@ adlib2vgm -i ./pal1/30.乐逍遥.RIX -o 30.乐逍遥.vgm
 ## TODO
 - Better file format detection
 - Loops
-- Metadata
 
 Contributions are welcomed!
 
