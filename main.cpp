@@ -162,6 +162,14 @@ int main(int argc, char **argv) {
 			return 0;
 		}
 
+		if (cmd.unmatched().size()) {
+			std::cout << "error: unmatched command line arguments: ";
+			for (auto u : cmd.unmatched())
+				std::cout << u << " ";
+			std::cout << "\n";
+			return 2;
+		}
+
 		if (cmd.count("verbose")) global_verbose = true;
 		if (cmd.count("debug"))   global_debug   = true;
 		if (cmd.count("loop"))    loop           = true;
