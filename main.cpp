@@ -277,11 +277,11 @@ int main(int argc, char **argv) {
 	thisopl.set_desc(player->getdesc());
 	thisopl.set_loop(loop);
 
-	thisopl.save();
+	int retval = thisopl.save();
 
 	puts("Done.");
 
-	return 0;
+	return retval;
 }
 
 // vi: ts=8 sw=8 noet

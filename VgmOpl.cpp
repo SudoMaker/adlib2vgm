@@ -145,7 +145,7 @@ void VgmOpl::append_as_u16string(std::string line) {
 	buffer.push_back(0);
 }
 
-void VgmOpl::save() {
+int VgmOpl::save() {
 	if (buffered_sleep_samples) store_sleep(buffered_sleep_samples);
 	buffer.push_back(vgm_cmd_end_of_sound_data);
 
@@ -182,8 +182,24 @@ void VgmOpl::save() {
 	}
 
 	file = new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary);
+	if (!file->good()) {
+		std::cerr << "error opening " << filename << "\n";
+		return EXIT_FAILURE;
+	}
 
 	file->write(reinterpret_cast<const char *>(&buffer[0]), buffer.size());
+	if (!file->good()) {
+		std::cerr << "error writing to " << filename << "\n";
+		return EXIT_FAILURE;
+	}
+
+	file->close();
+	if (!file->good()) {
+		std::cerr << "error closing " << filename << "\n";
+		return EXIT_FAILURE;
+	}
+
+	return EXIT_SUCCESS;
 }
 
 void VgmOpl::set_author(std::string s) {
