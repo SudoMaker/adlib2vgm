@@ -222,7 +222,7 @@ int main(int argc, char **argv) {
 	global_use_opl3 = mode == "opl3";
 	printf("mode: %s\n", mode.c_str());
 
-	thisopl = {output_file};
+	thisopl = { };
 
 	std::unique_ptr<CPlayer> player;
 
@@ -277,7 +277,7 @@ int main(int argc, char **argv) {
 	thisopl.set_desc(player->getdesc());
 	thisopl.set_loop(loop);
 
-	int retval = thisopl.save();
+	int retval = thisopl.save(output_file);
 
 	puts("Done.");
 

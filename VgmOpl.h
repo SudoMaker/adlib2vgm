@@ -25,19 +25,14 @@
 
 class VgmOpl: public Copl {
 public:
-	// Who cares copying the string one more time? Sorry, I care.
-	// We can't expect everyone to correctly write C++ !!!
-	// We also can't expect everyone to know how to use CMake in 2021 !!!
-	VgmOpl() = default;
-
-	VgmOpl(const std::string &filename);
+	VgmOpl();
 
 	~VgmOpl() override = default;
 
 	void init() override {}
 	void write(int reg, int val) override;
 	void insert_sleep(uint16_t samples);
-	int save();
+	int save(std::string &filename);
 
 	void set_author(std::string author);
 	void set_title(std::string title);
@@ -52,13 +47,11 @@ protected:
 
 	static const unsigned char	op_table[9];
 
-	std::ofstream *file;
 	uint32_t sample_count = 0;
 	std::vector<uint8_t> buffer;
 	uint16_t buffered_sleep_samples = 0;
 	std::string author, title, desc;
 	bool loop;
-	std::string filename;
 };
 
 // vi: ts=8 sw=8 noet
