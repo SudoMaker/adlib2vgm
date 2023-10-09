@@ -6,6 +6,7 @@ if [ ! -e ../build/adlib2vgm ] ; then
 fi
 
 mkdir -p test
+> test.exit
 
 for i in ../examples/* ; do
     e=${i##*.}
@@ -15,9 +16,12 @@ for i in ../examples/* ; do
         *)
             o=`basename "$i" "$e"`vgm
             ../build/adlib2vgm -i "$i" -o "test/$o"
+            echo "$? $i" >> test.exit
             ;;
     esac
 done
+
+diff -s reference.exit test.exit
 
 md5sum test/* > test.md5sum
 diff -s reference.md5sum test.md5sum
