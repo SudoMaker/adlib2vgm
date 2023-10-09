@@ -20,7 +20,7 @@ for i in ../examples/* ; do
 done
 
 md5sum test/* > test.md5sum
-diff -s test.md5sum reference.md5sum
+diff -s reference.md5sum test.md5sum
 
 stat -c '%n %s' test/* > test.size
-diff -s test.size reference.size
+diff -s reference.size test.size
