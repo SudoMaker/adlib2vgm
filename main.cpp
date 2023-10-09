@@ -149,11 +149,12 @@ int main(int argc, char **argv) {
 		("o,out", "Output file", cxxopts::value<std::string>())
 		("s,subsong", "Select subsong", cxxopts::value<unsigned int>()->default_value("1"))
 		("L,loop", "Enable looping")
+		("z,gzipped", "Export gzipped .vgz file")
 		;
 
 	std::string mode, input_file, output_file, format;
 	unsigned int subsong;
-	bool loop = false;
+	bool loop = false, gzipped = false;
 
 	try {
 		auto cmd = options.parse(argc, argv);
@@ -174,6 +175,7 @@ int main(int argc, char **argv) {
 		if (cmd.count("verbose")) global_verbose = true;
 		if (cmd.count("debug"))   global_debug   = true;
 		if (cmd.count("loop"))    loop           = true;
+		if (cmd.count("gzipped")) gzipped        = true;
 
 		if (cmd.count("list-formats")) {
 			puts("Supported formats / file extensions:");
@@ -277,7 +279,7 @@ int main(int argc, char **argv) {
 	thisopl.set_desc(player->getdesc());
 	thisopl.set_loop(loop);
 
-	int retval = thisopl.save(output_file);
+	int retval = thisopl.save(output_file, gzipped);
 
 	puts("Done.");
 

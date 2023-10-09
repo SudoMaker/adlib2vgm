@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set (CMAKE_CXX_FLAGS "-DDEBUG -O3 -W -Wall -Wno-unused-parameter -Wno-implicit-fallthrough")
 set (CMAKE_EXE_LINKER_FLAGS "-static -s")
 
-include_directories("binio" "utfcpp")
+include_directories("binio" "utfcpp" "zstr")
 
 file(GLOB_RECURSE SOURCES_BINIO "binio/*.cpp")
 file(GLOB_RECURSE SOURCES_FMTS "Formats/*.cpp")
@@ -16,8 +16,11 @@ file(GLOB_RECURSE SOURCES_FAKE_ADPLUG "FakeAdplug/*.cpp")
 
 add_executable(adlib2vgm
 	${SOURCES_BINIO}
+	${SOURCES_GZSTREAM}
 	${SOURCES_FAKE_ADPLUG}
 	${SOURCES_FMTS}
 	main.cpp
 	VgmOpl.cpp
 )
+
+target_link_libraries(adlib2vgm "z")

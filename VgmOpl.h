@@ -32,7 +32,7 @@ public:
 	void init() override {}
 	void write(int reg, int val) override;
 	void insert_sleep(uint16_t samples);
-	int save(std::string &filename);
+	int save(std::string &filename, bool gzipped);
 
 	void set_author(std::string author);
 	void set_title(std::string title);

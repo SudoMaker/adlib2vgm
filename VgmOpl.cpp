@@ -20,6 +20,7 @@
 
 #include "VgmOpl.h"
 #include "utf8.h"
+#include "zstr.h"
 
 #define OPL2_CLOCK 3579545
 #define OPL3_CLOCK 14318180
@@ -143,7 +144,7 @@ void VgmOpl::append_as_u16string(std::string line) {
 	buffer.push_back(0);
 }
 
-int VgmOpl::save(std::string &filename) {
+int VgmOpl::save(std::string &filename, bool gzipped) {
 	if (buffered_sleep_samples) store_sleep(buffered_sleep_samples);
 	buffer.push_back(vgm_cmd_end_of_sound_data);
 
@@ -179,7 +180,13 @@ int VgmOpl::save(std::string &filename) {
 		write32le(&buffer[vgm_loop_samples], sample_count);
 	}
 
-	std::ofstream *file = new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary);
+	std::unique_ptr<std::ostream> file;
+
+	if (!gzipped)
+		file = std::unique_ptr<std::ostream>(new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary));
+	else
+		file = std::unique_ptr<std::ostream>(new zstr::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary));
+
 	if (!file->good()) {
 		std::cerr << "error opening " << filename << "\n";
 		return EXIT_FAILURE;
@@ -191,9 +198,9 @@ int VgmOpl::save(std::string &filename) {
 		return EXIT_FAILURE;
 	}
 
-	file->close();
+	file->flush();
 	if (!file->good()) {
-		std::cerr << "error closing " << filename << "\n";
+		std::cerr << "error flushing " << filename << "\n";
 		return EXIT_FAILURE;
 	}
 
