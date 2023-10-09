@@ -98,9 +98,9 @@ void VgmOpl::store_sleep(uint16_t &n_samples) {
 		buffer.push_back(vgm_cmd_wait_882_samples);
 		buffer.push_back(vgm_cmd_wait_n1_samples + n_samples - 882 - 1);
 	} else {
-		uint8_t buf[3] = { vgm_cmd_wait_n_samples };
-		write16le(&buf[1], n_samples);
-		buffer.insert(buffer.end(), buf, buf+sizeof(buf));
+		buffer.push_back(vgm_cmd_wait_n_samples);
+		buffer.push_back(n_samples & 0xff);
+		buffer.push_back(n_samples >> 8);
 	}
 	n_samples = 0;
 }
