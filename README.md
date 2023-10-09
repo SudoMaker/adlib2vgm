@@ -1,4 +1,5 @@
-# adlib2vgm [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Build/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/push_pr_build_cmake.yml) [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Release/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/release_cmake.yml)
+# adlib2vgm
+[![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Build/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/push_pr_build_cmake.yml) [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Release/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/release_cmake.yml)
 
 Converts file formats supported by AdPlug to VGM format.
 
@@ -28,8 +29,35 @@ Currently built targets:
 - C++17 compatible compiler
 - CMake 3.14+
 - POSIX compatible environment
+- zlib 1.3
 
 Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
+
+## Build instructions
+
+Compile:
+
+```shell script
+git clone https://github.com/SudoMaker/adlib2vgm
+cd adlib2vgm
+mkdir build
+cd build
+cmake -G 'Ninja' ..
+ninja
+```
+
+Install:
+```shell scrip
+sudo cp adlib2vgm /usr/bin
+```
+
+Test:
+```shell script
+cd ../tools
+./test-all.sh
+```
+
+All checks should report to be identical.
 
 ## Supported formats
 - A2M: AdLib Tracker 2
@@ -122,3 +150,4 @@ This project makes use of the following open source software:
 - [cxxopts](https://github.com/jarro2783/cxxopts)
 - [utfcpp](https://github.com/nemtrif/utfcpp)
 - [zstr](https://github.com/mateidavid/zstr)
+- [zlib](https://www.zlib.net/)
