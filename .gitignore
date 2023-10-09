@@ -2,3 +2,4 @@ build
 *~
 tools/test/*
 tools/test.md5sum
+tools/test.size
