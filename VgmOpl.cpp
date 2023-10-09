@@ -61,7 +61,7 @@ void VgmOpl::write32le(uint8_t *buffer, uint32_t value) {
 }
 
 VgmOpl::VgmOpl(const std::string &filename) {
-	file = new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary);
+	this->filename = filename;
 
 	uint8_t buf[vgm_header_size] = "Vgm ";
 
@@ -180,6 +180,8 @@ void VgmOpl::save() {
 		write32le(&buffer[vgm_loop_offset], vgm_header_size - vgm_loop_offset);
 		write32le(&buffer[vgm_loop_samples], sample_count);
 	}
+
+	file = new std::ofstream(filename, std::ios::out | std::ios::trunc | std::ios::binary);
 
 	file->write(reinterpret_cast<const char *>(&buffer[0]), buffer.size());
 }

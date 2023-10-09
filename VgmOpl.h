@@ -58,6 +58,7 @@ protected:
 	uint16_t buffered_sleep_samples = 0;
 	std::string author, title, desc;
 	bool loop;
+	std::string filename;
 };
 
 // vi: ts=8 sw=8 noet
