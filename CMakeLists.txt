@@ -8,16 +8,16 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set (CMAKE_CXX_FLAGS "-DDEBUG -O3 -W -Wall -Wno-unused-parameter -Wno-implicit-fallthrough")
 set (CMAKE_EXE_LINKER_FLAGS "-static -s")
 
-include_directories("binio")
+include_directories("binio" "utfcpp")
 
-file(GLOB_RECURSE SOURCES_BINIO "binio/*.*")
-file(GLOB_RECURSE SOURCES_FMTS "Formats/*.*")
-file(GLOB_RECURSE SOURCES_FAKE_ADPLUG "FakeAdplug/*.*")
+file(GLOB_RECURSE SOURCES_BINIO "binio/*.cpp")
+file(GLOB_RECURSE SOURCES_FMTS "Formats/*.cpp")
+file(GLOB_RECURSE SOURCES_FAKE_ADPLUG "FakeAdplug/*.cpp")
 
 add_executable(adlib2vgm
-        ${SOURCES_BINIO}
-        ${SOURCES_FAKE_ADPLUG}
-        ${SOURCES_FMTS}
-        main.cpp
-        VgmOpl.cpp
-        )
+	${SOURCES_BINIO}
+	${SOURCES_FAKE_ADPLUG}
+	${SOURCES_FMTS}
+	main.cpp
+	VgmOpl.cpp
+)

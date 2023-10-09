@@ -19,7 +19,7 @@
 */
 
 #include "VgmOpl.h"
-#include "utfcpp/utf8.h"
+#include "utf8.h"
 
 #define OPL2_CLOCK 3579545
 #define OPL3_CLOCK 14318180
