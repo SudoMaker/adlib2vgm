@@ -111,26 +111,13 @@ All checks should report to be identical.
 ## Usage examples
 ```shell script
 adlib2vgm -i ~/Downloads/ALLOYRUN.RAD -o ALLOYRUN.vgm
-```
-
-```shell script
 adlib2vgm.exe -i D:\Downloads\ALLOYRUN.RAD -o ALLOYRUN.vgm
-```
-
-```shell script
 adlib2vgm -i ~/Vibrants/Metal/Pop_Syndrom.d00 -o Pop_Syndrom.vgm
-```
-
-```shell script
 adlib2vgm -m opl3 -i ~/Downloads/ALLOYRUN.RAD -o ALLOYRUN_OPL3.vgm
-```
-
-```shell script
 adlib2vgm -f DRO2 -i some_dro2_file.dro -o foo.vgm
-```
-
-```shell script
-adlib2vgm -i ./pal1/30.乐逍遥.RIX -o 30.乐逍遥.vgm
+adlib2vgm -z -i ./pal1/30.乐逍遥.RIX -o 30.乐逍遥.vgz
+adlib2vgm -L -z -i ../funkyou.wfl -o funkyou.vgz
+adlib2vgm -f detect -i somefile.ext -o outfile.vgm
 ```
 
 ## TODO
