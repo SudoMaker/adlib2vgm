@@ -116,9 +116,9 @@ adlib2vgm -i ~/Vibrants/Metal/Pop_Syndrom.d00 -o Pop_Syndrom.vgm
 adlib2vgm -m opl3 -i ~/Downloads/ALLOYRUN.RAD -o ALLOYRUN_OPL3.vgm
 adlib2vgm -f DRO2 -i some_dro2_file.dro -o foo.vgm
 adlib2vgm -z -i ./pal1/30.乐逍遥.RIX -o 30.乐逍遥.vgz
-adlib2vgm -L -z -i ../funkyou.wfl -o funkyou.vgz
+adlib2vgm -L -z -i funkyou.wfl -o funkyou.vgz
 adlib2vgm -f detect -i somefile.ext -o outfile.vgm
-adlib2vgm --mode opl3 --gzipped --loop --subsong 6 --in ../examples/mus.mkf --out subsong6.vgz
+adlib2vgm --mode opl3 --gzipped --loop --subsong 6 --in mus.mkf --out subsong6.vgz
 ```
 
 ## TODO
