@@ -21,3 +21,6 @@ done
 
 md5sum test/* > test.md5sum
 diff -s test.md5sum reference.md5sum
+
+stat -c '%n %s' test/* > test.size
+diff -s test.size reference.size
