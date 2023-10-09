@@ -121,3 +121,4 @@ This project makes use of the following open source software:
 - [AdPlug](https://github.com/adplug/adplug)
 - [cxxopts](https://github.com/jarro2783/cxxopts)
 - [utfcpp](https://github.com/nemtrif/utfcpp)
+- [zstr](https://github.com/mateidavid/zstr)
