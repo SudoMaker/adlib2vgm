@@ -14,6 +14,12 @@ file(GLOB_RECURSE SOURCES_BINIO "binio/*.cpp")
 file(GLOB_RECURSE SOURCES_FMTS "Formats/*.cpp")
 file(GLOB_RECURSE SOURCES_FAKE_ADPLUG "FakeAdplug/*.cpp")
 
+set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+find_library(ZLIB "z")
+if(NOT ZLIB)
+	message(FATAL_ERROR "static zlib library not found")
+endif()
+
 add_executable(adlib2vgm
 	${SOURCES_BINIO}
 	${SOURCES_GZSTREAM}
@@ -23,4 +29,4 @@ add_executable(adlib2vgm
 	VgmOpl.cpp
 )
 
-target_link_libraries(adlib2vgm "z")
+target_link_libraries(adlib2vgm ${ZLIB})
