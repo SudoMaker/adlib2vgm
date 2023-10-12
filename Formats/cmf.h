@@ -19,11 +19,8 @@
  * cmf.h - CMF player by Adam Nielsen <malvineous@shikadi.net>
  */
 
-#pragma once
-
 #include <stdint.h> // for uintxx_t
-
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "player.h"
 
 typedef struct {
 	uint16_t iInstrumentBlockOffset;

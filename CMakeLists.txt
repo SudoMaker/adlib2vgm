@@ -1,43 +1,32 @@
 cmake_minimum_required(VERSION 3.14)
-project(adlib2vgm)
+project(adlib2vgm LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CPM_DOWNLOAD_VERSION 0.27.5)
-set(CPM_DOWNLOAD_LOCATION "${CMAKE_BINARY_DIR}/cmake/CPM_${CPM_DOWNLOAD_VERSION}.cmake")
+set (CMAKE_CXX_FLAGS "-DDEBUG -O3 -W -Wall -Wno-unused-parameter -Wno-implicit-fallthrough")
+set (CMAKE_EXE_LINKER_FLAGS "-static -s")
 
-if(NOT (EXISTS ${CPM_DOWNLOAD_LOCATION}))
-    message(STATUS "Downloading CPM.cmake")
-    file(DOWNLOAD https://github.com/TheLartians/CPM.cmake/releases/download/v${CPM_DOWNLOAD_VERSION}/CPM.cmake ${CPM_DOWNLOAD_LOCATION})
+include_directories("binio" "utfcpp" "zstr")
+
+file(GLOB_RECURSE SOURCES_BINIO "binio/*.cpp")
+file(GLOB_RECURSE SOURCES_FMTS "Formats/*.cpp")
+file(GLOB_RECURSE SOURCES_FAKE_ADPLUG "FakeAdplug/*.cpp")
+
+set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
+find_library(ZLIB "z")
+if(NOT ZLIB)
+	message(FATAL_ERROR "static zlib library not found")
 endif()
 
-include(${CPM_DOWNLOAD_LOCATION})
-
-CPMAddPackage(
-        NAME cxxopts
-        GITHUB_REPOSITORY jarro2783/cxxopts
-        VERSION 3.0.0
-        GIT_TAG 2d8e17c4f88efce80e274cb03eeb902e055a91d3
-)
-
-CPMAddPackage(
-        NAME IODash
-        GITHUB_REPOSITORY YukiWorkshop/IODash
-        VERSION 0.1.8
-)
-
-include_directories(${cxxopts_SOURCE_DIR}/include)
-
-file(GLOB_RECURSE SOURCES_BINIO "binio/*.*")
-file(GLOB_RECURSE SOURCES_FMTS "Formats/*.*")
-file(GLOB_RECURSE SOURCES_FAKE_ADPLUG "FakeAdplug/*.*")
-
 add_executable(adlib2vgm
-        ${SOURCES_BINIO}
-        ${SOURCES_FAKE_ADPLUG}
-        ${SOURCES_FMTS}
-        main.cpp CommonIncludes.hpp
-        VgmOpl.cpp VgmOpl.hpp
-        )
+	${SOURCES_BINIO}
+	${SOURCES_GZSTREAM}
+	${SOURCES_FAKE_ADPLUG}
+	${SOURCES_FMTS}
+	main.cpp
+	VgmOpl.cpp
+)
 
-target_link_libraries(adlib2vgm IODash stdc++fs)
+target_link_libraries(adlib2vgm ${ZLIB})

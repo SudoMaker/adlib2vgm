@@ -28,9 +28,8 @@
  * - Finalized support for displaying arbitrary Tag data.
  */
 
-#pragma once
 #include <stdint.h> // for uintxx_t
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "player.h"
 
 class CdroPlayer: public CPlayer
 {
@@ -39,9 +38,9 @@ class CdroPlayer: public CPlayer
 		static const uint8_t iCmdDelayL = 0x01; // Wraithverge: fixed this with "static".
 
 		uint8_t *data;
-		int iLength;
-		int iPos;
-		int iDelay;
+		unsigned int iLength;
+		unsigned int iPos;
+		unsigned int iDelay;
 
 	private:
 		char title[40];

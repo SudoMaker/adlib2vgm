@@ -26,22 +26,20 @@
  * - Finalized support for displaying arbitrary Tag data.
  */
 
-#pragma once
-
 #include <stdint.h> // for uintxx_t
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "player.h"
 
 class Cdro2Player: public CPlayer
 {
 	protected:
 		uint8_t iCmdDelayS, iCmdDelayL;
-		int iConvTableLen;
+		uint8_t iConvTableLen;
 		uint8_t *piConvTable;
 
 		uint8_t *data;
-		int iLength;
-		int iPos;
-		int iDelay;
+		unsigned int iLength;
+		unsigned int iPos;
+		unsigned int iDelay;
 
 	private:
 		char title[40];

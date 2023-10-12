@@ -26,10 +26,10 @@ class binsbase: virtual public binio
 {
 public:
   binsbase(void *str, unsigned long len);
-  virtual ~binsbase();
+  ~binsbase() override;
 
-  virtual void seek(long p, Offset offs = Set);
-  virtual long pos();
+  void seek(long p, Offset offs = Set) override;
+  long pos() override;
 
 protected:
   Byte	*data, *spos;
@@ -40,27 +40,27 @@ class binisstream: public binistream, virtual public binsbase
 {
 public:
   binisstream(void *str, unsigned long len);
-  virtual ~binisstream();
+  ~binisstream() override;
 
 protected:
-  virtual Byte getByte();
+  Byte getByte() override;
 };
 
 class binosstream: public binostream, virtual public binsbase
 {
 public:
   binosstream(void *str, unsigned long len);
-  virtual ~binosstream();
+  ~binosstream() override;
 
 protected:
-  virtual void putByte(Byte b);
+  void putByte(Byte b) override;
 };
 
 class binsstream: public binisstream, public binosstream
 {
 public:
   binsstream(void *str, unsigned long len);
-  virtual ~binsstream();
+  ~binsstream() override;
 };
 
 #endif

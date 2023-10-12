@@ -35,7 +35,7 @@ public:
   typedef int Mode;
 
   binfbase();
-  virtual ~binfbase();
+  ~binfbase() override;
 
   virtual void open(const char *filename, const Mode mode) = 0;
 #if BINIO_ENABLE_STRING
@@ -43,8 +43,8 @@ public:
 #endif
   void close();
 
-  virtual void seek(long pos, Offset offs = Set);
-  virtual long pos();
+  void seek(long pos, Offset offs = Set) override;
+  long pos() override;
 
 protected:
   FILE *f;
@@ -59,15 +59,15 @@ public:
   binifstream(const std::string &filename, const Mode mode = NoCreate);
 #endif
 
-  virtual ~binifstream();
+  ~binifstream() override;
 
-  virtual void open(const char *filename, const Mode mode = NoCreate);
+  void open(const char *filename, const Mode mode = NoCreate) override;
 #if BINIO_ENABLE_STRING
-  virtual void open(const std::string &filename, const Mode mode = NoCreate);
+  void open(const std::string &filename, const Mode mode = NoCreate) override;
 #endif
 
 protected:
-  virtual Byte getByte();
+  Byte getByte() override;
 };
 
 class binofstream: public binostream, virtual public binfbase
@@ -79,15 +79,15 @@ public:
   binofstream(const std::string &filename, const Mode mode = 0);
 #endif
 
-  virtual ~binofstream();
+  ~binofstream() override;
 
-  virtual void open(const char *filename, const Mode mode = 0);
+  void open(const char *filename, const Mode mode = 0) override;
 #if BINIO_ENABLE_STRING
-  virtual void open(const std::string &filename, const Mode mode = 0);
+  void open(const std::string &filename, const Mode mode = 0) override;
 #endif
 
 protected:
-  virtual void putByte(Byte b);
+  void putByte(Byte b) override;
 };
 
 class binfstream: public binifstream, public binofstream
@@ -99,11 +99,11 @@ public:
   binfstream(const std::string &filename, const Mode mode = 0);
 #endif
 
-  virtual ~binfstream();
+  ~binfstream() override;
 
-  virtual void open(const char *filename, const Mode mode = 0);
+  void open(const char *filename, const Mode mode = 0) override;
 #if BINIO_ENABLE_STRING
-  virtual void open(const std::string &filename, const Mode mode = 0);
+  void open(const std::string &filename, const Mode mode = 0) override;
 #endif
 };
 

@@ -42,13 +42,13 @@ class biniwstream: public binistream
 {
 public:
   biniwstream(istream *istr);
-  virtual ~biniwstream();
+  ~biniwstream() override;
 
-  virtual void seek(long pos, Offset offs = Set);
-  virtual long pos();
+  void seek(long pos, Offset offs = Set) override;
+  long pos() override;
 
 protected:
-  virtual Byte getByte();
+  Byte getByte() override;
 
 private:
   istream *in;
@@ -58,13 +58,13 @@ class binowstream: public binostream
 {
 public:
   binowstream(ostream *ostr);
-  virtual ~binowstream();
+  ~binowstream() override;
 
-  virtual void seek(long pos, Offset offs = Set);
-  virtual long pos();
+  void seek(long pos, Offset offs = Set) override;
+  long pos() override;
 
 protected:
-  virtual void putByte(Byte b);
+  void putByte(Byte b) override;
 
 private:
   ostream *out;
@@ -74,14 +74,14 @@ class binwstream: public biniwstream, public binowstream
 {
 public:
   binwstream(iostream *str);
-  virtual ~binwstream();
+  ~binwstream() override;
 
-  virtual void seek(long pos, Offset offs = Set);
-  virtual long pos();
+  void seek(long pos, Offset offs = Set) override;
+  long pos() override;
 
 protected:
-  virtual Byte getByte();
-  virtual void putByte(Byte b);
+  Byte getByte() override;
+  void putByte(Byte b) override;
 
 private:
   iostream *io;

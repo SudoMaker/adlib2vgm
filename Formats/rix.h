@@ -20,9 +20,7 @@
  *                                           BSPAL <BSPAL.ys168.com>
  */
 
-#pragma once
-
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "player.h"
 
 class CrixPlayer: public CPlayer
 {
@@ -36,12 +34,14 @@ class CrixPlayer: public CPlayer
   bool update();
   void rewind(int subsong);
   float getrefresh();
-  uint32_t getsubsongs();
+  unsigned int getsubsongs();
+  unsigned int getsubsong();
 
   std::string gettype()
     { return std::string("Softstar RIX OPL Music Format"); };
 
  protected:	
+  int song = 0;
   typedef struct {
     uint8_t v[14];
   } ADDT;

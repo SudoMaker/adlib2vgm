@@ -113,14 +113,14 @@ protected:
 #endif
 
 private:
-  static const Flags detect_system_flags();
+  static Flags detect_system_flags();
 };
 
 class binistream: virtual public binio
 {
 public:
   binistream();
-  virtual ~binistream();
+  ~binistream() override;
 
   Int readInt(unsigned int size);
   Float readFloat(FType ft);
@@ -148,7 +148,7 @@ class binostream: virtual public binio
 {
 public:
   binostream();
-  virtual ~binostream();
+  ~binostream() override;
 
   void writeInt(Int val, unsigned int size);
   void writeFloat(Float f, FType ft);
@@ -169,7 +169,7 @@ class binstream: public binistream, public binostream
 {
 public:
   binstream();
-  virtual ~binstream();
+  ~binstream() override;
 };
 
 #endif

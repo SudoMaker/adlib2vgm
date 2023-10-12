@@ -19,7 +19,7 @@
  * lds.h - LOUDNESS Player by Simon Peter <dn.tlp@gmx.net>
  */
 
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "player.h"
 
 class CldsPlayer: public CPlayer
 {

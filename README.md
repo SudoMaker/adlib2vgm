@@ -1,4 +1,5 @@
-# adlib2vgm [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Build/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/push_pr_build_cmake.yml) [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Release/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/release_cmake.yml)
+# adlib2vgm
+[![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Build/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/push_pr_build_cmake.yml) [![Actions Status](https://github.com/SudoMaker/adlib2vgm/workflows/Release/badge.svg)](https://github.com/SudoMaker/adlib2vgm/actions/workflows/release_cmake.yml)
 
 Converts file formats supported by AdPlug to VGM format.
 
@@ -28,50 +29,99 @@ Currently built targets:
 - C++17 compatible compiler
 - CMake 3.14+
 - POSIX compatible environment
+- zlib 1.3
 
 Windows users please use WSL or Cygwin, or maybe try Linux a bit ;-)
 
+## Build instructions
+
+Compile:
+
+```shell script
+git clone https://github.com/SudoMaker/adlib2vgm
+cd adlib2vgm
+mkdir build
+cd build
+cmake -G 'Ninja' ..
+ninja
+```
+
+Install:
+```shell scrip
+sudo cp adlib2vgm /usr/bin
+```
+
+Test:
+```shell script
+cd ../tools
+./test-all.sh
+```
+
+All checks should report to be identical.
+
 ## Supported formats
+- A2M: AdLib Tracker 2
+- AGD: HERAD Herbulot AdLib Player
+- AMD: AMUSIC AdLib Tracker
+- AS3M: Scream Tracker 3 AdLib
+- BAM: Bob's Adlib Music Player
+- BMF: Easy AdLib 1.0 (aka FMPlay) by The Brain
+- CFF: Boom Tracker
 - CMF: Creative Music File Format by Creative Technology
-- RAD: Reality ADlib Tracker by Reality
+- CMF2: SoundFX Macs Opera CMF Player
 - D00: EdLib by Vibrants
 - DRO: DOSBox Raw OPL Format
-- RIX: Softstar RIX OPL Music Format
+- DRO2: DOSBox Raw OPL Format
+- DTM: DeFy AdLib Tracker
+- GOT: God Of Thunder Player
+- HSC: HSC Adlib Composer / HSC-Tracker
+- IMF: Apogee (id/3D Realms) Music File
+- JBM: Johannes Bjerregaard's JBM Adlib Music Format
+- KSM: Ken Silverman Music (requires insts.dat)
+- LAA: Lucas Arts Adlib Music
+- LDS: Loudness Sound System by Andras Molnar
+- MAD: Mlat Adlib Tracker
+- MDI: AdLib Visual Composer MIDIPlay File
 - MID: MIDI Audio File Format
+- MKF: Softstar RIX OPL Music Format in MKF container
 - MUS: AdLib MIDI Music Format by Ad Lib Inc.
-
-Other formats supported by AdPlug can be added by copying the decoding code pieces to `Formats` directory + some minor modifications.
+- PIS: Beni Tracker PIS module
+- RAD: Reality ADlib Tracker by Reality
+- RAW: Raw AdLib Capture
+- RIX: Softstar RIX OPL Music Format
+- ROL: AdLib Visual Composer by Ad Lib Inc. (needs standard.bnk)
+- S3M: Scream Tracker 3 AdLib
+- SA2: Surprise AdLib Tracker
+- SAT: Surprise AdLib Tracker
+- SCI: Sierra AdLib Music
+- SDB: HERAD Herbulot AdLib Player
+- SNG: AdLib Tracker 1.0
+- SNG2: Faust Music Tracker
+- SNG3: SNGPlay File Format
+- SOP: Note Sequencer v1.0 by sopepos
+- SQX: HERAD Herbulot AdLib Player
+- U6M: Ultima 6 Music
+- WLF: Wolfenstein 3D Music File
+- XAD: Lunatic Flash/Logic Design Player
+- XAD2: Hybrid MiG-29M Player by Domark
+- XAD3: Hyp LKCC/SAC Player
+- XAD4: Psi/Future Crew PGRID Player
+- XAD5: Ratt/GRIF Player
 
 ## Usage examples
 ```shell script
 adlib2vgm -i ~/Downloads/ALLOYRUN.RAD -o ALLOYRUN.vgm
-```
-
-```shell script
 adlib2vgm.exe -i D:\Downloads\ALLOYRUN.RAD -o ALLOYRUN.vgm
-```
-
-```shell script
 adlib2vgm -i ~/Vibrants/Metal/Pop_Syndrom.d00 -o Pop_Syndrom.vgm
-```
-
-```shell script
 adlib2vgm -m opl3 -i ~/Downloads/ALLOYRUN.RAD -o ALLOYRUN_OPL3.vgm
-```
-
-```shell script
 adlib2vgm -f DRO2 -i some_dro2_file.dro -o foo.vgm
-```
-
-```shell script
-adlib2vgm -i ./pal1/30.乐逍遥.RIX -o 30.乐逍遥.vgm
+adlib2vgm -z -i ./pal1/30.乐逍遥.RIX -o 30.乐逍遥.vgz
+adlib2vgm -L -z -i funkyou.wfl -o funkyou.vgz
+adlib2vgm -f detect -i somefile.ext -o outfile.vgm
+adlib2vgm --mode opl3 --gzipped --loop --subsong 6 --in mus.mkf --out subsong6.vgz
 ```
 
 ## TODO
-- Better file format detection
-- Loops
-- Metadata
-
 Contributions are welcomed!
 
 ## Notes
@@ -86,3 +136,6 @@ If you see a possible license violation, don't hesitate to tell us.
 This project makes use of the following open source software:
 - [AdPlug](https://github.com/adplug/adplug)
 - [cxxopts](https://github.com/jarro2783/cxxopts)
+- [utfcpp](https://github.com/nemtrif/utfcpp)
+- [zstr](https://github.com/mateidavid/zstr)
+- [zlib](https://www.zlib.net/)

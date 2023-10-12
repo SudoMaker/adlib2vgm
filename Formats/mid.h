@@ -19,9 +19,7 @@
  * mid.h - LAA, SCI, MID & CMF Player by Philip Hassey <philhassey@hotmail.com>
  */
 
-#pragma once
-
-#include "../FakeAdplug/FakeAdplug.hpp"
+#include "player.h"
 
 class CmidPlayer: public CPlayer
 {
@@ -71,7 +69,7 @@ public:
   };
 
   char *author,*title,*remarks,emptystr;
-  long flen;
+  unsigned long flen;
   unsigned long pos;
   unsigned long sierra_pos; //sierras gotta be special.. :>
   int subsongs;
@@ -81,6 +79,7 @@ public:
   int adlib_style;
   int adlib_mode;
   unsigned char myinsbank[128][16], smyinsbank[128][16];
+  int midi_type;
   midi_channel ch[16];
   int chp[18][3];
 
@@ -99,9 +98,10 @@ public:
  private:
   bool load_sierra_ins(const std::string &fname, const CFileProvider &fp);
   void midiprintf(const char *format, ...);
-  unsigned char datalook(long pos);
+  unsigned char datalook(unsigned long pos);
   unsigned long getnexti(unsigned long num);
   unsigned long getnext(unsigned long num);
+  void readString(char *dst, unsigned long num);
   unsigned long getval();
   void sierra_next_section();
   void midi_write_adlib(unsigned int r, unsigned char v);
