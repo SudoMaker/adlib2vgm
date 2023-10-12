@@ -42,6 +42,16 @@ git clone https://github.com/SudoMaker/adlib2vgm
 cd adlib2vgm
 mkdir build
 cd build
+cmake ..
+make -j `nproc`
+```
+
+or if you have `ninja` installed and prefer to use it:
+```shell script
+git clone https://github.com/SudoMaker/adlib2vgm
+cd adlib2vgm
+mkdir build
+cd build
 cmake -G 'Ninja' ..
 ninja
 ```
