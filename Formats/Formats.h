@@ -20,6 +20,7 @@
 #pragma once
 
 #include "a2m.h"
+#include "a2m-v2.h"
 #include "adtrack.h"
 #include "amd.h"
 #include "bam.h"
