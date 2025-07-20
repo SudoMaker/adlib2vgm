@@ -196,8 +196,8 @@ bool CmodPlayer::update()
   if(!resolve_order()) return !songend;
   pattnr = order[ord];
 
-  if(!rw) AdPlug_LogWrite("\nCmodPlayer::update(): Pattern: %d, Order: %ld\n", pattnr, ord);
-  AdPlug_LogWrite("CmodPlayer::update():%3ld|", rw);
+  if(!rw) AdPlug_LogWrite("\nCmodPlayer::update(): Pattern: %d, Order: %d\n", pattnr, ord);
+  AdPlug_LogWrite("CmodPlayer::update():%3d|", rw);
 
   // play row
   pattern_delay = 0;

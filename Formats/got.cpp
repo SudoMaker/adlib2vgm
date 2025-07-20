@@ -27,7 +27,7 @@
 #include <string.h>
 
 #include "got.h"
-//#include "database.h"
+#include "database.h"
 
 /*** public methods *************************************/
 
@@ -65,7 +65,7 @@ bool CgotPlayer::load(const std::string &filename, const CFileProvider &fp)
 		}
 	}
 	f->seek(0);
-//	CAdPlugDatabase::CKey key(*f);
+	CAdPlugDatabase::CKey key(*f);
 	f->seek(2);
 
 	// load section
@@ -76,7 +76,7 @@ bool CgotPlayer::load(const std::string &filename, const CFileProvider &fp)
 		data[i].time = f->readInt(1);
 		data[i].reg = f->readInt(1); data[i].val = f->readInt(1);
 	}
-#if 0
+
 	CAdPlugDatabase::CKey menu_music;
 	menu_music.crc16 = 0xB627;
 	menu_music.crc32 = 0x72036C41;
@@ -84,9 +84,8 @@ bool CgotPlayer::load(const std::string &filename, const CFileProvider &fp)
 	if (key == menu_music)
 		rate = 140.0f;
 	else
-#endif
 		rate = 120.0f;
-	if (fp.filesize(f) == 11313) rate = 140.0f;
+
 	fp.close(f);
 	rewind(0);
 	return true;

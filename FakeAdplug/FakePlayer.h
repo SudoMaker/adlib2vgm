@@ -23,6 +23,7 @@
 
 #include "../CommonIncludes.h"
 
+#include "../Formats/database.h"
 #include "FakeFprovide.h"
 #include "FakeOpl.h"
 
@@ -74,7 +75,7 @@ public:
 
 protected:
 	Copl		*opl;	// our OPL chip
-	void	*db;	// AdPlug Database
+	CAdPlugDatabase	*db;	// AdPlug Database
 
 	static const unsigned short	note_table[12];	// standard adlib note table
 	static const unsigned char	op_table[9];	// the 9 operators as expected by the OPL

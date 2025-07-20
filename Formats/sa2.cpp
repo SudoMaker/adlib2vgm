@@ -167,7 +167,7 @@ bool Csa2Loader::load(const std::string &filename, const CFileProvider &fp)
     activechan = f->readInt(2) << 16;		// active channels
 
   AdPlug_LogWrite("Csa2Loader::load(\"%s\"): sat_type = %x, nop = %d, "
-		  "length = %ld, restartpos = %ld, activechan = %lx, bpm = %d\n",
+		  "length = %d, restartpos = %d, activechan = %x, bpm = %d\n",
 		  filename.c_str(), sat_type, nop, length, restartpos, activechan, bpm);
 
   // track data
@@ -237,8 +237,7 @@ bool Csa2Loader::load(const std::string &filename, const CFileProvider &fp)
 std::string Csa2Loader::gettype()
 {
   char tmpstr[40];
-
-  sprintf(tmpstr,"Surprise! Adlib Tracker 2 (version %d)",header.version);
+  snprintf(tmpstr,sizeof(tmpstr),"Surprise! Adlib Tracker 2 (version %d)",header.version);
   return std::string(tmpstr);
 }
 

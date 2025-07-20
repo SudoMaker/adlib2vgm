@@ -28,7 +28,7 @@ const unsigned char CPlayer::op_table[9] =
 	{0x00, 0x01, 0x02, 0x08, 0x09, 0x0a, 0x10, 0x11, 0x12};
 
 CPlayer::CPlayer(Copl *newopl)
-	: opl(newopl)
+	: opl(newopl), db(new CAdPlugDatabase)
 {
 }
 
