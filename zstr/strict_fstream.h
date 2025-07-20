@@ -53,30 +53,12 @@ inline std::string trim_to_null(const std::vector<char> &buff)
 ///   - http://stackoverflow.com/a/901316/717706
 static std::string strerror()
 {
-    // Can't use std::string since we're pre-C++17
-    std::vector<char> buff(256, '\0');
-
-#ifdef _WIN32
-    // Since strerror_s might set errno itself, we need to store it.
-    const int err_num = errno;
-    if (strerror_s(buff.data(), buff.size(), err_num) != 0) {
-        return trim_to_null(buff);
-    } else {
-        return "Unknown error (" + std::to_string(err_num) + ")";
-    }
-#elif ((_POSIX_C_SOURCE >= 200112L || _XOPEN_SOURCE >= 600 || defined(__APPLE__) || defined(__FreeBSD__)) && ! _GNU_SOURCE) || defined(__MUSL__)
-// XSI-compliant strerror_r()
-    const int err_num = errno; // See above
-    if (strerror_r(err_num, buff.data(), buff.size()) == 0) {
-        return trim_to_null(buff);
-    } else {
-        return "Unknown error (" + std::to_string(err_num) + ")";
-    }
-#else
-// GNU-specific strerror_r()
-    char * p = strerror_r(errno, &buff[0], buff.size());
-    return std::string(p, std::strlen(p));
-#endif
+	// Whoever wrote this function and this file should honestly kill themselves
+	// - ReimuNotMoe 2025-07-21
+	int errno_save = errno;
+	auto ret = std::string{::strerror(errno)};
+	errno = errno_save;
+	return ret;
 }
 
 /// Exception class thrown by failed operations.
