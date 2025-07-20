@@ -27,6 +27,8 @@
 #include <memory>
 #include <filesystem>
 
+#include <strings.h>
+
 #include <cmath>
 #include <cassert>
 #include <cstring>
